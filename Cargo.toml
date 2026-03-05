@@ -1,0 +1,80 @@
+[workspace]
+name = "xforce-platform"
+version = "0.1.0"
+edition = "2021"
+authors = ["XForce Team"]
+license = "Apache-2.0"
+repository = "https://github.com/trilltino/xforce-monorepo"
+description = "XForce Platform - Solana DeFi ecosystem monorepo"
+resolver = "2"
+
+members = [
+    # XForce Terminal
+    "xforce-terminal/backend",
+    "xforce-terminal/crates/libs/lib-core",
+    "xforce-terminal/crates/libs/lib-auth",
+    "xforce-terminal/crates/libs/lib-web",
+    "xforce-terminal/crates/libs/lib-solana",
+    "xforce-terminal/crates/libs/lib-utils",
+    "xforce-terminal/crates/utils/clear-users",
+    "xforce-terminal/terminal-tauri/src-tauri",
+
+    # XForce Terminal Contracts - Client and Examples only
+    # (Anchor programs use their own build system)
+    "xforce-terminal-contracts/client",
+    "xforce-terminal-contracts/examples",
+
+    # XForce Crypto Info
+    "xforce-crypto-info",
+]
+
+[workspace.dependencies]
+# Core dependencies used across workspace
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.43", features = ["full"] }
+anyhow = "1.0"
+thiserror = "1.0"
+tracing = "0.1"
+
+# Solana dependencies
+solana-program = "1.17"
+solana-sdk = "1.17"
+solana-client = "1.17"
+anchor-lang = "0.30"
+anchor-spl = "0.30"
+spl-token = "4.0"
+spl-associated-token-account = "3.0"
+
+# Web/Axum dependencies
+axum = "0.7"
+tower = "0.4"
+tower-http = "0.5"
+hyper = "1.0"
+
+# Database
+sqlx = { version = "0.8", features = [
+    "runtime-tokio",
+    "postgres",
+    "uuid",
+    "chrono",
+] }
+
+# Async
+async-trait = "0.1"
+futures = "0.3"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Testing
+reqwest = { version = "0.12", features = ["json"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true
