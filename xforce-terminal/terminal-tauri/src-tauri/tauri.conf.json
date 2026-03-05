@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "XForce Terminal",
+  "version": "0.1.0",
+  "identifier": "com.xforce.terminal",
+  "build": {
+    "frontendDist": "../src-ui/dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "cd ../src-ui && npm run dev",
+    "beforeBuildCommand": "cd ../src-ui && npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "XForce Terminal",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 1000,
+        "minHeight": 700,
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "fullscreen": false,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' customprotocol: asset:",
+        "connect-src": "ipc: http://ipc.localhost http://localhost:* https://api.devnet.solana.com https://quote-api.jup.ag",
+        "img-src": "'self' asset: http://asset.localhost blob: data: https:",
+        "style-src": "'unsafe-inline' 'self'"
+      },
+      "capabilities": ["default"]
+    }
+  },
+  "bundle": {
+    "active": false
+  }
+}

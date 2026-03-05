@@ -1,0 +1,58 @@
+[package]
+name = "terminal-tauri"
+version = "0.1.0"
+description = "XForce Terminal - Tauri Edition"
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "terminal_tauri_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "terminal-tauri"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Tauri
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-http = "2"
+
+# Async
+tokio = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+bincode = "1.3"
+
+# Solana - v1.16 for Anchor 0.29 compatibility
+solana-client = "1.16"
+solana-sdk = "1.16"
+solana-program = "1.16"
+
+# HTTP
+reqwest = { workspace = true }
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Logging
+tracing = "0.1"
+
+# Time
+chrono = { workspace = true }
+
+# Random
+rand = "0.8"
+uuid = { version = "1", features = ["v4"] }
+
+# Internal crates
+lib-core = { workspace = true }
+lib-solana = { workspace = true }

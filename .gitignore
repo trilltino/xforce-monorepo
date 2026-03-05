@@ -1,0 +1,48 @@
+# Rust
+**/target/
+**/Cargo.lock
+**/*.rs.bk
+
+# Node.js
+**/node_modules/
+**/dist/
+**/.vite/
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/.venv/
+**/venv/
+
+# IDE
+**/.idea/
+**/.vscode/
+**/*.swp
+**/*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+**/.env
+**/.env.local
+
+# Build artifacts
+**/build/
+**/out/
+**/release/
+
+# Database
+**/*.sqlite
+**/*.sqlite3
+
+# Logs
+**/*.log
+**/logs/
+
+# Temporary files
+**/tmp/
+**/temp/
+**/*.tmp

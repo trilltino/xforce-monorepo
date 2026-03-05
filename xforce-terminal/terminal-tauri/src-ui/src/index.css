@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-terminal-border;
+  }
+  
+  html, body, #root {
+    @apply h-full;
+  }
+  
+  body {
+    @apply bg-terminal-bg text-terminal-text font-mono text-sm;
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-terminal-panel border border-terminal-border rounded-lg;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded font-medium transition-all duration-150;
+    @apply active:scale-[0.98];
+  }
+  
+  .btn-primary {
+    @apply btn bg-terminal-accent hover:bg-blue-600 text-white;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-terminal-panel hover:bg-terminal-border border border-terminal-border;
+  }
+  
+  .btn-success {
+    @apply btn bg-terminal-success hover:bg-emerald-600 text-white;
+  }
+  
+  .btn-danger {
+    @apply btn bg-terminal-danger hover:bg-red-600 text-white;
+  }
+  
+  .input {
+    @apply bg-terminal-bg border border-terminal-border rounded px-3 py-2;
+    @apply focus:outline-none focus:border-terminal-accent;
+    @apply placeholder:text-terminal-muted;
+  }
+  
+  .table-header {
+    @apply text-terminal-muted text-xs uppercase tracking-wider;
+    @apply px-4 py-2 text-left font-semibold;
+  }
+  
+  .table-cell {
+    @apply px-4 py-3 border-b border-terminal-border;
+  }
+  
+  .price-up {
+    @apply text-terminal-success;
+  }
+  
+  .price-down {
+    @apply text-terminal-danger;
+  }
+  
+  .nav-item {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg;
+    @apply text-terminal-muted hover:text-terminal-text hover:bg-terminal-panel;
+    @apply transition-colors cursor-pointer;
+  }
+  
+  .nav-item.active {
+    @apply bg-terminal-panel text-terminal-accent;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-bg;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-border rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-muted;
+  }
+}

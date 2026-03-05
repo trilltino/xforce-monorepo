@@ -1,0 +1,31 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Core libraries - use workspace
+lib-core = { workspace = true }
+lib-auth = { workspace = true }
+lib-web = { workspace = true }
+lib-solana = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Environment
+dotenvy = "0.15"
+
+# Error handling
+anyhow = "1"
+
+# Database - use 0.6 for compatibility
+sqlx = { version = "0.6", features = ["runtime-tokio", "sqlite"] }
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"

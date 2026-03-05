@@ -1,0 +1,31 @@
+[package]
+name = "lib-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Database - use 0.6 for better compatibility
+sqlx = { version = "0.6", features = ["runtime-tokio", "sqlite", "chrono", "migrate", "offline"] }
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Web framework
+axum = { version = "0.8", features = [] }
+
+# Time
+chrono = { workspace = true }
+
+# Utilities
+lib-utils = { workspace = true }
+
+# Environment
+dotenvy = "0.15"
+
+# Logging
+tracing = "0.1"
