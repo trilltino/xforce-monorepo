@@ -20,7 +20,6 @@ members = [
     "xforce-terminal/terminal-tauri/src-tauri",
 
     # XForce Terminal Contracts - Client and Examples only
-    # (Anchor programs use their own build system)
     "xforce-terminal-contracts/client",
     "xforce-terminal-contracts/examples",
 
@@ -29,13 +28,21 @@ members = [
 ]
 
 [workspace.dependencies]
-# Core dependencies used across workspace
+# Internal crates
+lib-core = { path = "xforce-terminal/crates/libs/lib-core" }
+lib-auth = { path = "xforce-terminal/crates/libs/lib-auth" }
+lib-web = { path = "xforce-terminal/crates/libs/lib-web" }
+lib-solana = { path = "xforce-terminal/crates/libs/lib-solana" }
+lib-utils = { path = "xforce-terminal/crates/libs/lib-utils" }
+
+# Core dependencies
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tokio = { version = "1.43", features = ["full"] }
 anyhow = "1.0"
 thiserror = "1.0"
 tracing = "0.1"
+chrono = { version = "0.4", features = ["serde"] }
 
 # Solana dependencies
 solana-program = "1.17"
@@ -63,9 +70,6 @@ sqlx = { version = "0.8", features = [
 # Async
 async-trait = "0.1"
 futures = "0.3"
-
-# Time
-chrono = { version = "0.4", features = ["serde"] }
 
 # Testing
 reqwest = { version = "0.12", features = ["json"] }
