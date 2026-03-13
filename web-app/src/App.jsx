@@ -16,7 +16,7 @@ import Month4 from './pages/roadmap/Month4';
 
 function App() {
     return (
-        <Router basename="/xforcesolutions">
+        <Router basename="/xfterminal">
             <div className="min-h-screen bg-black text-white transition-colors duration-300">
                 <Navbar />
                 <main className="container mx-auto px-4 py-8 pt-24">
