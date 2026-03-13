@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Home from './pages/Home';
@@ -15,8 +16,11 @@ import Month3 from './pages/roadmap/Month3';
 import Month4 from './pages/roadmap/Month4';
 
 function App() {
+    console.log('App rendering, basename: /xfterminal');
+    console.log('Current path:', window.location.pathname);
     return (
-        <Router basename="/xfterminal">
+        <ErrorBoundary>
+            <Router basename="/xfterminal">
             <div className="min-h-screen bg-black text-white transition-colors duration-300">
                 <Navbar />
                 <main className="container mx-auto px-4 py-8 pt-24">
@@ -39,6 +43,7 @@ function App() {
                     </main>
                 </div>
             </Router>
+        </ErrorBoundary>
     );
 }
 
