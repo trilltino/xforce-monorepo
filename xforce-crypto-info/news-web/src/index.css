@@ -1,35 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-gray-50 text-gray-900 antialiased;
-  }
+@theme {
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
 }
 
-@layer components {
-  .article-card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-shadow hover:shadow-md;
-  }
-  
-  .article-card h2 {
-    @apply text-xl font-semibold text-gray-800 mb-2;
-  }
-  
-  .article-card .meta {
-    @apply text-sm text-gray-500 mb-3 flex items-center gap-2;
-  }
-  
-  .sentiment-positive {
-    @apply bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-xs font-medium;
-  }
-  
-  .sentiment-negative {
-    @apply bg-red-100 text-red-800 px-2 py-0.5 rounded-full text-xs font-medium;
-  }
-  
-  .sentiment-neutral {
-    @apply bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs font-medium;
-  }
+@utility article-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-shadow hover:shadow-md;
+}
+@utility sentiment-positive {
+  @apply bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-xs font-medium;
+}
+@utility sentiment-negative {
+  @apply bg-red-100 text-red-800 px-2 py-0.5 rounded-full text-xs font-medium;
+}
+@utility sentiment-neutral {
+  @apply bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs font-medium;
+}
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+}
+.article-card h2 {
+  @apply text-xl font-semibold text-gray-800 mb-2;
+}
+.article-card .meta {
+  @apply text-sm text-gray-500 mb-3 flex items-center gap-2;
 }

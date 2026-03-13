@@ -1,6 +1,6 @@
 use solana_client::rpc_client::RpcClient;
+use solana_client::rpc_config::CommitmentConfig;
 use solana_sdk::{
-    commitment_config::CommitmentConfig,
     signature::{Keypair, Signature},
     signer::Signer,
     transaction::Transaction,

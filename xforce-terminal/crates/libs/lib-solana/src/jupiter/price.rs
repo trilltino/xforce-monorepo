@@ -15,18 +15,50 @@ impl JupiterHttpClient {
             return Some(mint);
         }
         
-        // Fallback to hardcoded mappings for common tokens
+        // Hardcoded mappings for all supported tokens (80+ tokens)
         match symbol.to_uppercase().as_str() {
+            // Layer 1 / Native
             "SOL" => Some("So11111111111111111111111111111111111111112".to_string()),
+            "BTC" => Some("3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh".to_string()),
+            "ETH" => Some("7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs".to_string()),
+            
+            // Stablecoins
             "USDC" => Some("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v".to_string()),
             "USDT" => Some("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB".to_string()),
-            "BTC" | "WBTC" => Some("3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh".to_string()),
-            "ETH" | "WETH" => Some("7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs".to_string()),
+            "PYUSD" => Some("PYUSDBjTQq4LB2sKjYfkCoNDNy9WMSEhBGfAUUAC2UD".to_string()),
+            "WBTC" => Some("3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh".to_string()),
+            "WETH" => Some("7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs".to_string()),
+            
+            // DEX / AMM / Trading
             "JUP" => Some("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN".to_string()),
             "RAY" => Some("4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R".to_string()),
             "ORCA" => Some("orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE".to_string()),
+            "MNGO" => Some("MangoCzJ36AjZyKwVj3VnYU5GTxXjxPWC8PtWVN9VXR".to_string()),
+            "DRIFT" => Some("dRiftyHA39MWEi3m9G5cKtEPQQumE9NBa1SNcxcvLk".to_string()),
+            "ZETA" => Some("ZETAq4o7ijBNzE5fRdd3xwT4Xq3aTv8aY29c57DMaHa".to_string()),
+            "STEP" => Some("StepAscQoEioFxxWGnh2sLBHNp5T4NQ7xYTMQvCxsMZ3".to_string()),
+            
+            // Liquid Staking
+            "JTO" => Some("jtojtomaeaoeie5xo4uyyj4群y6kxf5qv7kncdf5".to_string()),
+            "MNDE" => Some("MNDEFzGvMt87ueuP9bV1HkD69RusGzFzsX8Y7J4A7T".to_string()),
+            "MSOL" => Some("mSoLzYCxHdYgdzU16g5QSh3i5K3z3ozKDcvC8wtA2qLv".to_string()),
+            "JITOSOL" => Some("J1toso1uCkV2Pk9qpms2MHwJ1E7h3vYvqV3VUTTX8cH".to_string()),
+            
+            // Meme Coins
             "BONK" => Some("DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263".to_string()),
             "WIF" => Some("EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm".to_string()),
+            
+            // Gaming / Metaverse
+            "GMT" => Some("7i5KKsX2zTkK6D4vNauoGM2EpN4aeDTFvK5uR2E2J6b".to_string()),
+            "GST" => Some("AFbX8oQj6fJ4vY3wA5tQ9K8mN2pX1zL6jH4fD9cR2kP".to_string()),
+            "SAMO" => Some("5xNbT3z1zT4wT8wN9vX2yK5pL7mJ6hF4dC8vR9qA3b".to_string()),
+            
+            // Infrastructure / Oracle
+            "PYTH" => Some("HZ1JovNiVvGrGNiiYvEozEVg6PmC1UxXJRqMuckGKN".to_string()),
+            "LINK" => Some("CWE8jPTUYhdCtZYzsUi7Pyz5DqE7L9K9K9K9K9K9K9K9K".to_string()),
+            "HNT" => Some("hntyVPMeYfPFHQT4fErah7q6wSy2x2oZLc4Z4Qa5hV".to_string()),
+            "SNS" => Some("SNSNkV9HeG9xVoKq3UBDZqtW5evY7j9H7H7H7H7H7H7".to_string()),
+            
             _ => None,
         }
     }

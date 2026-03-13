@@ -1,19 +1,19 @@
 //! Password hashing with Argon2
 
-use argon2::{
-    password_hash::{rand_core::OsRng, PasswordHash, PasswordHasher, PasswordVerifier, SaltString},
-    Argon2,
-};
+use argon2::{Argon2, PasswordHash, PasswordHasher, PasswordVerifier};
+use argon2::password_hash::SaltString;
+use rand;
 
 pub fn hash_password(password: &str) -> Result<String, String> {
     if password.len() < 8 {
         return Err("Password must be at least 8 characters".to_string());
     }
 
-    let salt = SaltString::generate(&mut OsRng);
+    let salt = SaltString::generate(&mut rand::thread_rng());
     let argon2 = Argon2::default();
 
-    argon2.hash_password(password.as_bytes(), &salt)
+    argon2
+        .hash_password(password.as_bytes(), &salt)
         .map(|h| h.to_string())
         .map_err(|e| format!("Failed to hash: {}", e))
 }

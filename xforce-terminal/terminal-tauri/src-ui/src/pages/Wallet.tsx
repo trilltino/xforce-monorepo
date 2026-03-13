@@ -59,10 +59,10 @@ export function Wallet() {
               </div>
             </div>
 
-            <div className="p-4 bg-terminal-bg rounded-lg">
-              <p className="text-terminal-muted text-sm mb-1">Balance</p>
-              <p className="text-3xl font-bold font-mono">
-                {wallet.balance.toFixed(4)} <span className="text-terminal-accent">SOL</span>
+            <div className="p-4 bg-terminal-bg border border-terminal-border rounded-lg">
+              <p className="text-terminal-muted text-xs uppercase font-bold mb-1">Portfolio Balance</p>
+              <p className="text-4xl font-bold font-mono">
+                {wallet.balance.toFixed(4)} <span className="text-terminal-muted">SOL</span>
               </p>
             </div>
 

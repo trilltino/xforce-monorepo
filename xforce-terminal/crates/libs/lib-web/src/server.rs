@@ -18,7 +18,9 @@ use lib_solana::contracts::batch_swap::routes::{
     handle_health_app_state,
     handle_metadata_app_state,
 };
+use lib_social_fi::SocialFiNode;
 use crate::chat::{ChatAppState, handle_braid_subscription, handle_braid_put, handle_typing_event};
+use solana_sdk::signature::Keypair;
 use crate::handlers;
 use crate::middleware::{stamp_req, log_requests};
 use std::sync::Arc;
@@ -36,6 +38,7 @@ pub struct AppState {
     pub contract_registry: Arc<ContractRegistry>,
     pub batch_swap_plugin: Arc<BatchSwapRouterPlugin>,
     pub price_stream: Arc<PriceStreamServer>,
+    pub social_node: Arc<SocialFiNode>,
 }
 
 impl axum::extract::FromRef<AppState> for DbPool {
@@ -73,6 +76,12 @@ impl axum::extract::FromRef<AppState> for Arc<PriceStreamServer> {
         state.price_stream.clone()
     }
 }
+
+impl axum::extract::FromRef<AppState> for Arc<SocialFiNode> {
+    fn from_ref(state: &AppState) -> Self {
+        state.social_node.clone()
+    }
+}
 // endregion: --- AppState
 
 // region: --- Server Configuration
@@ -97,6 +106,8 @@ impl Default for ServerConfig {
                 "http://127.0.0.1:3002".to_string(),
                 "http://localhost:8080".to_string(),
                 "http://127.0.0.1:8080".to_string(),
+                "http://localhost:1420".to_string(),
+                "http://127.0.0.1:1420".to_string(),
             ],
             migrations_path: "./migrations",
         }
@@ -130,14 +141,13 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<()> {
         .unwrap_or_else(|_| "info".to_string())
         .to_lowercase();
     
-    let filter = match log_level.as_str() {
-        "trace" => tracing_subscriber::EnvFilter::new("trace"),
-        "debug" => tracing_subscriber::EnvFilter::new("debug"),
-        "info" => tracing_subscriber::EnvFilter::new("info"),
-        "warn" => tracing_subscriber::EnvFilter::new("warn"),
-        "error" => tracing_subscriber::EnvFilter::new("error"),
-        _ => tracing_subscriber::EnvFilter::new("info"),
-    };
+    let filter = tracing_subscriber::EnvFilter::try_from_default_env()
+        .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new(&log_level))
+        // Silence noisy low-level libraries
+        .add_directive("h2=off".parse().unwrap())
+        .add_directive("hyper=off".parse().unwrap())
+        .add_directive("tower=off".parse().unwrap())
+        .add_directive("rustls=off".parse().unwrap());
     
     // Configure subscriber with detailed formatting
     let subscriber = tracing_subscriber::fmt()
@@ -147,7 +157,6 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<()> {
         .with_thread_names(true) // Show thread names
         .with_line_number(true) // Show line numbers
         .with_file(true) // Show file names
-        .with_max_level(tracing::Level::TRACE)
         .finish();
     
     tracing::subscriber::set_global_default(subscriber)
@@ -256,7 +265,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<()> {
     // Initialize price stream server
     info!(" Initializing price stream server...");
     let price_stream = Arc::new(PriceStreamServer::new(
-        Arc::clone(&solana.jupiter),
+        Arc::clone(&solana.pyth),
         500, // 500ms update interval for sub-second updates
     ));
     
@@ -288,6 +297,28 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<()> {
     let chat_db = pool.clone();
     let chat_state = Arc::new(ChatAppState::new(chat_db, chat_config));
 
+    // Initialize Social-Fi P2P Node for Bootstrap Peer
+    info!(" Initializing Social-Fi P2P Bootstrap Peer...");
+    let social_db_path = std::path::Path::new("./data/social-fi-server.db").to_path_buf();
+    
+    // Server identity - in production this should be a stable secret from KMS/Env
+    let server_keypair = if let Ok(secret) = std::env::var("SOCIAL_SERVER_SECRET") {
+        Keypair::try_from_base58_string(&secret).unwrap_or_else(|_| {
+            info!(" Invalid SOCIAL_SERVER_SECRET base58, using random temporary identity");
+            Keypair::new()
+        })
+    } else {
+        info!(" No SOCIAL_SERVER_SECRET found, using random temporary identity");
+        Keypair::new()
+    };
+    
+    let social_node = Arc::new(SocialFiNode::spawn(
+        server_keypair,
+        Some(30334), // Default P2P port for server
+        social_db_path,
+    ).await.map_err(|e| anyhow::anyhow!("Failed to spawn Social-Fi server node: {}", e))?);
+    info!(" Social-Fi P2P Peer started. Node ID: {}", social_node.inner.node_id());
+
     let state = AppState {
         db: pool,
         config: app_config,
@@ -295,6 +326,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<()> {
         contract_registry: Arc::clone(&contract_registry),
         batch_swap_plugin: Arc::clone(&batch_swap_plugin_arc),
         price_stream: Arc::clone(&price_stream),
+        social_node,
     };
 
     // Create router

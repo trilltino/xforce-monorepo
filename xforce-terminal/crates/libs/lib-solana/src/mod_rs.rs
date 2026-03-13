@@ -216,8 +216,10 @@ impl SolanaState {
         let jupiter = Arc::new(JupiterClient::new()?);
         tracing::info!("Jupiter API client ready");
 
-        let pyth = Arc::new(PythClient::new()?);
-        tracing::info!("Pyth Network oracle client ready");
+        // Initialize Pyth client with optional API key from environment
+        let pyth_key = std::env::var("PYTH_API_KEY").ok();
+        let pyth = Arc::new(PythClient::new(pyth_key)?);
+        tracing::info!("Pyth Network oracle client ready (using provided API key: {})", std::env::var("PYTH_API_KEY").is_ok());
 
         let price_cache = Arc::new(PriceCache::new(jupiter.clone(), pyth.clone()));
         tracing::info!("Price cache initialized (Pyth + Jupiter fallback)");

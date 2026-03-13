@@ -9,25 +9,20 @@ export default {
     extend: {
       colors: {
         terminal: {
-          bg: '#0a0a0f',
-          panel: '#12121a',
-          border: '#1e1e2e',
-          text: '#e0e0e0',
-          muted: '#6b7280',
-          accent: '#3b82f6',
-          success: '#10b981',
-          danger: '#ef4444',
-          warning: '#f59e0b',
+          bg: '#000000',
+          panel: '#000000',
+          border: '#ffffff',
+          text: '#ffffff',
+          muted: '#888888',
+          accent: '#ffffff',
+          success: '#ffffff',
+          danger: '#ffffff',
+          warning: '#ffffff',
         },
-        neon: {
-          blue: '#00d4ff',
-          green: '#00ff88',
-          purple: '#b829dd',
-          orange: '#ff6b35',
-        }
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+        sans: ['"Nunito Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'JetBrains Mono', 'Consolas', 'monospace'],
       },
     },
   },

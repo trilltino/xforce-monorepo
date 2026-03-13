@@ -94,11 +94,41 @@
 
 use anchor_client::Client;
 use anchor_client::solana_sdk::{
-    commitment_config::CommitmentConfig,
     pubkey::Pubkey,
-    signature::Signer,
+    signer::keypair::Keypair,
+    commitment_config::CommitmentConfig,
 };
-use std::rc::Rc;
+use std::sync::Arc;
+use std::ops::Deref;
+
+/// Wrapper around Arc<Keypair> that implements the traits required by anchor-client
+#[derive(Clone)]
+pub struct ClonableKeypair(Arc<Keypair>);
+
+impl ClonableKeypair {
+    /// Create a new ClonableKeypair from a Keypair
+    pub fn new(keypair: Keypair) -> Self {
+        Self(Arc::new(keypair))
+    }
+
+    /// Create a ClonableKeypair from an existing Arc<Keypair>
+    pub fn from_arc(arc: Arc<Keypair>) -> Self {
+        Self(arc)
+    }
+
+    /// Get the underlying Keypair reference
+    pub fn as_keypair(&self) -> &Keypair {
+        &self.0
+    }
+}
+
+impl Deref for ClonableKeypair {
+    type Target = Keypair;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 pub mod batch_swap_router;
 pub mod error;
@@ -123,7 +153,7 @@ pub use types::SwapParams;
 ///
 /// # Returns
 ///
-/// * `Ok(Client<Rc<C>>)` - A configured Anchor client on success
+/// * `Ok(Client<C>)` - A configured Anchor client on success
 /// * `Err(ContractError)` - An error if client creation fails
 ///
 /// # Example
@@ -142,14 +172,11 @@ pub use types::SwapParams;
 /// - The cluster URL is invalid
 /// - The client cannot be created
 /// - The payer keypair is invalid
-pub fn create_client<C>(cluster_url: &str, payer: C) -> Client<Rc<C>>
-where
-    C: Clone + Signer + 'static,
-{
+pub fn create_client(cluster_url: &str, payer: ClonableKeypair) -> Client<ClonableKeypair> {
     let commitment = CommitmentConfig::confirmed();
     Client::new_with_options(
         anchor_client::Cluster::Custom(cluster_url.to_string(), "".to_string()),
-        Rc::new(payer),
+        payer,
         commitment,
     )
 }

@@ -1,0 +1,24 @@
+[package]
+name = "lib-strategy"
+version = "0.1.0"
+edition = "2021"
+description = "Core library for defining and executing trading strategies in XForce"
+
+[dependencies]
+# Core dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+
+# Solana dependencies
+solana-sdk = { workspace = true }
+solana-program = { workspace = true }
+
+# Internal dependencies
+lib-core = { path = "../lib-core" }
+lib-solana = { path = "../lib-solana" }
+lib-utils = { path = "../lib-utils" }

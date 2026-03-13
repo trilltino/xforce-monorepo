@@ -8,6 +8,8 @@ export function SwapPanel() {
     swapTo, 
     swapAmount, 
     setSwapAmount, 
+    setSwapFrom,
+    setSwapTo,
     tokens,
     wallet 
   } = useTerminalStore();
@@ -67,7 +69,7 @@ export function SwapPanel() {
             value={swapFrom?.address || ''}
             onChange={(e) => {
               const token = tokens.find(t => t.address === e.target.value);
-              // setSwapFrom(token || null);
+              setSwapFrom(token || null);
             }}
           >
             <option value="">Select token</option>
@@ -89,7 +91,7 @@ export function SwapPanel() {
         {/* Swap Arrow */}
         <div className="flex justify-center">
           <button className="p-2 rounded-lg bg-terminal-bg hover:bg-terminal-border transition-colors">
-            ⇅
+            &lt;&gt;
           </button>
         </div>
 
@@ -101,7 +103,7 @@ export function SwapPanel() {
             value={swapTo?.address || ''}
             onChange={(e) => {
               const token = tokens.find(t => t.address === e.target.value);
-              // setSwapTo(token || null);
+              setSwapTo(token || null);
             }}
           >
             <option value="">Select token</option>
@@ -118,12 +120,12 @@ export function SwapPanel() {
           <div className="p-3 bg-terminal-bg rounded-lg space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-terminal-muted">Expected Output</span>
-              <span>{(quote.output_amount / 1e6).toFixed(6)}</span>
+              <span className="font-mono">{(quote.output_amount / 1e6).toFixed(6)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-terminal-muted">Price Impact</span>
-              <span className={quote.price_impact_pct > 1 ? 'text-terminal-danger' : 'text-terminal-success'}>
-                {quote.price_impact_pct.toFixed(2)}%
+              <span className="font-bold font-mono">
+                {quote.price_impact_pct > 1 ? '! ' : ''}{quote.price_impact_pct.toFixed(2)}%
               </span>
             </div>
           </div>

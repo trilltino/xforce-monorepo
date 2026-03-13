@@ -1,5 +1,4 @@
-import psycopg2
-import psycopg2.extras
+import sqlite3
 import json
 from typing import List, Dict, Any
 import polars as pl
@@ -8,12 +7,17 @@ import os
 
 class DatabaseWriter:
     def __init__(self, database_url: str):
-        self.database_url = database_url
-        self.conn = psycopg2.connect(database_url)
-        self.conn.autocommit = False
+        # Handle sqlite:/// prefix
+        if database_url.startswith("sqlite:///"):
+            self.db_path = database_url.replace("sqlite:///", "")
+        else:
+            self.db_path = database_url
+        
+        self.conn = sqlite3.connect(self.db_path)
+        self.conn.row_factory = sqlite3.Row
 
     def write_articles(self, articles_df: pl.DataFrame, source_id: int) -> int:
-        """Write articles to PostgreSQL database."""
+        """Write articles to SQLite database."""
         if articles_df.is_empty():
             return 0
 
@@ -24,7 +28,7 @@ class DatabaseWriter:
             try:
                 # Check if article already exists
                 cursor.execute(
-                    "SELECT id FROM articles WHERE url = %s OR external_id = %s",
+                    "SELECT id FROM articles WHERE url = ? OR external_id = ?",
                     (row.get("url", ""), row.get("external_id", ""))
                 )
                 if cursor.fetchone():
@@ -43,7 +47,7 @@ class DatabaseWriter:
                         source_id, external_id, title, content, url, author,
                         published_at, scraped_at, category, tags, sentiment_score,
                         sentiment_label, keywords, image_url
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     source_id,
                     row.get("external_id"),
@@ -52,7 +56,7 @@ class DatabaseWriter:
                     row.get("url", ""),
                     row.get("author"),
                     row.get("published_at"),
-                    datetime.now(),
+                    datetime.now().isoformat(),
                     row.get("category"),
                     json.dumps(row.get("tags", [])),
                     row.get("sentiment_score"),
@@ -70,8 +74,8 @@ class DatabaseWriter:
 
         # Update source last_scraped_at
         cursor.execute(
-            "UPDATE sources SET last_scraped_at = %s WHERE id = %s",
-            (datetime.now(), source_id)
+            "UPDATE sources SET last_scraped_at = ? WHERE id = ?",
+            (datetime.now().isoformat(), source_id)
         )
         self.conn.commit()
 
@@ -81,7 +85,7 @@ class DatabaseWriter:
         """Get or create source in database."""
         cursor = self.conn.cursor()
         
-        cursor.execute("SELECT id FROM sources WHERE name = %s", (source_config["name"],))
+        cursor.execute("SELECT id FROM sources WHERE name = ?", (source_config["name"],))
         result = cursor.fetchone()
         
         if result:
@@ -90,8 +94,7 @@ class DatabaseWriter:
         cursor.execute("""
             INSERT INTO sources (
                 name, url, type, endpoint, api_key, enabled, scrape_interval_minutes
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s)
-            RETURNING id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
             source_config["name"],
             source_config.get("url", ""),
@@ -102,6 +105,5 @@ class DatabaseWriter:
             source_config.get("scrape_interval_minutes", 15),
         ))
         self.conn.commit()
-        source_id = cursor.fetchone()[0]
-        return source_id
+        return cursor.lastrowid
 

@@ -34,14 +34,25 @@ pub async fn get_swap_quote(
 ) -> Result<SwapQuote, String> {
     // Call Jupiter API for quote
     let client = reqwest::Client::new();
+#[derive(Serialize)]
+    #[serde(rename_all = "camelCase")]
+    struct QuoteParams {
+        input_mint: String,
+        output_mint: String,
+        amount: String,
+        slippage_bps: String,
+    }
+
+    let params = QuoteParams {
+        input_mint: request.input_mint.clone(),
+        output_mint: request.output_mint.clone(),
+        amount: request.amount.to_string(),
+        slippage_bps: request.slippage_bps.unwrap_or(50).to_string(),
+    };
+
     let response = client
         .get("https://quote-api.jup.ag/v6/quote")
-        .query(&[
-            ("inputMint", request.input_mint),
-            ("outputMint", request.output_mint),
-            ("amount", request.amount.to_string()),
-            ("slippageBps", request.slippage_bps.unwrap_or(50).to_string()),
-        ])
+        .query(&params)
         .send()
         .await
         .map_err(|e| e.to_string())?;
@@ -74,5 +85,5 @@ pub async fn execute_swap(
     // 3. Send to Solana network
     
     // For now, return a mock signature
-    Ok("mock_signature_".to_string() + &uuid::Uuid::new_v4().to_string())
+    Ok(format!("mock_signature_{}", uuid::Uuid::new_v4()))
 }

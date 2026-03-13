@@ -43,20 +43,18 @@ class DataProcessor:
             pl.col("content")
                 .map_elements(
                     lambda x: self._strip_html(x) if x else "",
-                    return_dtype=pl.Utf8,
-                    strict=False
+                    return_dtype=pl.String
                 )
                 .alias("content"),
             # Ensure title is not empty
-            pl.col("title").fill_null("").str.strip().alias("title"),
+            pl.col("title").fill_null("").str.strip_chars().alias("title"),
             # Ensure URL is not empty
-            pl.col("url").fill_null("").str.strip().alias("url"),
+            pl.col("url").fill_null("").str.strip_chars().alias("url"),
             # Calculate content length
             pl.col("content")
                 .map_elements(
                     lambda x: len(x.split()) if x else 0,
-                    return_dtype=pl.UInt32,
-                    strict=False
+                    return_dtype=pl.UInt32
                 )
                 .alias("word_count"),
         ])
@@ -83,8 +81,7 @@ class DataProcessor:
             pl.struct(["title", "content"])
                 .map_elements(
                     lambda x: get_category(x["title"], x.get("content", "")),
-                    return_dtype=pl.Utf8,
-                    strict=False
+                    return_dtype=pl.String
                 )
                 .alias("category")
         ])
@@ -107,8 +104,7 @@ class DataProcessor:
             pl.col("title")
                 .map_elements(
                     lambda x: extract_keywords(x or ""),
-                    return_dtype=pl.List(pl.Utf8),
-                    strict=False
+                    return_dtype=pl.List(pl.String)
                 )
                 .alias("keywords")
         ])
@@ -116,6 +112,12 @@ class DataProcessor:
     def add_metadata_lazy(self, df: pl.LazyFrame) -> pl.LazyFrame:
         """Add metadata columns using Polars lazy operations."""
         return df.with_columns([
+            # Ensure published_at is a datetime
+            pl.col("published_at")
+                .cast(pl.String)
+                .str.to_datetime(strict=False)
+                .alias("published_at_dt")
+        ]).with_columns([
             # Extract domain from URL
             pl.col("url")
                 .str.extract(r"https?://([^/]+)", 1)
@@ -125,15 +127,9 @@ class DataProcessor:
                 .is_not_null()
                 .alias("has_image"),
             # Extract year, month, day from published_at if available
-            pl.col("published_at")
-                .dt.year()
-                .alias("published_year"),
-            pl.col("published_at")
-                .dt.month()
-                .alias("published_month"),
-            pl.col("published_at")
-                .dt.day()
-                .alias("published_day"),
+            pl.col("published_at_dt").dt.year().alias("published_year"),
+            pl.col("published_at_dt").dt.month().alias("published_month"),
+            pl.col("published_at_dt").dt.day().alias("published_day"),
         ])
 
 

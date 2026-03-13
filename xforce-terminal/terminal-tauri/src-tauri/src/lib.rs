@@ -11,6 +11,7 @@ use services::{SolanaService, MarketService};
 pub struct AppState {
     pub solana: SolanaService,
     pub market: MarketService,
+    pub social_node: Option<Arc<lib_social_fi::SocialFiNode>>,
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -24,6 +25,7 @@ pub fn run() {
             let state = AppState {
                 solana: SolanaService::new(),
                 market: MarketService::new(),
+                social_node: None,
             };
             app.manage(Arc::new(Mutex::new(state)));
 
@@ -44,13 +46,17 @@ pub fn run() {
             wallet::sign_transaction,
             
             // Market commands
-            market::get_prices,
             market::get_token_list,
-            market::get_candles,
             
             // Swap commands
             swap::get_swap_quote,
             swap::execute_swap,
+            
+            // Social commands
+            social::start_social_node,
+            social::connect_peer,
+            social::send_p2p_message,
+            social::share_file_p2p,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

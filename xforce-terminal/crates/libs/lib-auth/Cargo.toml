@@ -8,15 +8,16 @@ edition = "2021"
 serde = { workspace = true }
 
 # Authentication
-argon2 = "0.5.3"
-jsonwebtoken = "9"
+argon2 = { version = "0.5.3", features = ["password-hash"] }
+password-hash = "0.5.0"
+jsonwebtoken = "10"
+rand = "0.8.5"
 
 # Error handling
-thiserror = "2.0.17"
+thiserror = "2.0.18"
 
 # Time
 chrono = { workspace = true }
 
 # Utilities
 lib-utils = { path = "../lib-utils" }
-

@@ -1,35 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './index.css';
 
 const App: React.FC = () => {
-  const [isLight, setIsLight] = useState(false);
-
-  useEffect(() => {
-    if (isLight) {
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-    }
-  }, [isLight]);
-
   return (
     <div className="pdf-container">
-      {/* DISCRETE THEME TOGGLE SWITCH */}
-      <label className="switch">
-        <input
-          type="checkbox"
-          checked={isLight}
-          onChange={() => setIsLight(!isLight)}
-        />
-        <span className="slider"></span>
-      </label>
-
       {/* PAGE 1: BLOOMBERG REPLICA */}
       <div className="pdf-page transition-all duration-300">
         {/* TOP LEFT HEADER */}
         <div className="absolute top-[60px] left-[60px]">
           <p className="text-[14.5px] font-[400] text-gray-500 tracking-tight">
-            An XFTerminal Professional Services Offering
+            A Terminal Professional Services Offering
           </p>
         </div>
 
@@ -37,7 +17,7 @@ const App: React.FC = () => {
         <div className="absolute top-[35%] left-[60px] w-full max-w-[550px]">
           <h1 className="text-[72px] font-[900] leading-[1.02] tracking-[-0.035em] m-0 text-inherit">
             Getting started on the <br />
-            XFTerminal.
+            Terminal.
           </h1>
         </div>
 
@@ -46,7 +26,7 @@ const App: React.FC = () => {
           <div className="transform rotate-[270deg] origin-bottom-right translate-x-full">
             <div className="text-right">
               <span className="block text-[58px] font-[900] tracking-[-0.04em] leading-[0.9] text-inherit">
-                XFTerminal
+                Terminal
               </span>
               <span className="block text-[34px] font-[300] tracking-[-0.015em] leading-[1.2] opacity-80 mt-2 text-inherit">
                 for Professionals
@@ -84,7 +64,7 @@ const App: React.FC = () => {
               </div>
 
               <div className="border-l-[6px] border-[#ff9900] pl-10">
-                <h3 className="text-3xl font-[900] uppercase tracking-wider mb-2">XFTerminal Certified</h3>
+                <h3 className="text-3xl font-[900] uppercase tracking-wider mb-2">Terminal Certified</h3>
                 <p className="text-xl opacity-70 leading-snug">Demonstrate your comfort with the gold standard platform for on-chain intelligence.</p>
               </div>
             </div>
@@ -92,7 +72,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="mt-auto pt-12 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center opacity-40">
-          <div className="text-base font-[900] tracking-[0.2em] uppercase">XFTerminal | SMC PRO</div>
+          <div className="text-base font-[900] tracking-[0.2em] uppercase">Terminal | SMC PRO</div>
           <div className="text-base font-black text-inherit">PAGE 02</div>
         </div>
       </div>

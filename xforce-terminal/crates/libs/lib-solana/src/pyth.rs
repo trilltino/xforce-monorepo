@@ -39,6 +39,7 @@ use tracing::{debug, warn};
 pub struct PythClient {
     http: Client,
     hermes_url: String,
+    api_key: Option<String>,
 }
 
 /// Pyth Hermes API response containing price feed data.
@@ -76,15 +77,18 @@ struct PythPriceData {
 impl PythClient {
     /// Create a new Pyth Network API client.
     ///
+    /// # Arguments
+    /// * `api_key` - Optional Pyth API key (for hackathon/development)
+    ///
     /// # Returns
     /// * `Ok(PythClient)` - Successfully initialized client
     /// * `Err(_)` - Failed to build HTTP client (rare, only on system issues)
     ///
     /// # Example
     /// ```no_run
-    /// let client = PythClient::new()?;
+    /// let client = PythClient::new(Some("your-api-key"))?;
     /// ```
-    pub fn new() -> Result<Self> {
+    pub fn new(api_key: Option<String>) -> Result<Self> {
         let http = Client::builder()
             .timeout(std::time::Duration::from_secs(10))
             .build()
@@ -92,139 +96,106 @@ impl PythClient {
 
         Ok(Self {
             http,
-            hermes_url: "https://hermes.pyth.network".to_string(),
+            hermes_url: "https://hermes.pyth.network/v2/updates/price/latest".to_string(),
+            api_key,
         })
     }
 
+    /// Validate that a Pyth feed ID has the correct format.
+    ///
+    /// Pyth feed IDs must be 64-character hex strings (32 bytes).
+    fn is_valid_feed_id(feed_id: &str) -> bool {
+        let clean_id = feed_id.strip_prefix("0x").unwrap_or(feed_id);
+        clean_id.len() == 64 && clean_id.chars().all(|c| c.is_ascii_hexdigit())
+    }
+
     /// Convert token symbol to Pyth Network price feed ID.
-    ///
-    /// Each asset on Pyth has a unique price feed identified by a 32-byte hex string.
-    /// These IDs are stable and published by Pyth Network.
-    ///
-    /// # Arguments
-    /// * `symbol` - Token symbol (case-insensitive)
-    ///
-    /// # Returns
-    /// * `Some(feed_id)` - Pyth price feed ID for known symbols
-    /// * `None` - Unknown symbol or no Pyth feed available
-    ///
-    /// # Supported Assets
-    /// SOL, BTC/WBTC, ETH/WETH, USDC, USDT
-    ///
-    /// # Price Feed IDs
-    /// Feed IDs can be found at: https://pyth.network/developers/price-feed-ids
     fn symbol_to_price_feed_id(&self, symbol: &str) -> Option<&str> {
-        // TODO: Move these mappings to configuration or fetch from Pyth API
         match symbol.to_uppercase().as_str() {
+            // Layer 1 / Native
             "SOL" => Some("0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d"),
             "BTC" | "WBTC" => Some("0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43"),
             "ETH" | "WETH" => Some("0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace"),
+            
+            // DEX Core
+            "JUP" => Some("0x0a0408d619e9380abad35060f9192039ed5042fa6f82301d0e48bb52be830996"),
+            "RAY" => Some("0x91568baa8beb53db23eb3fb7f22c6e8bd303d103919e19733f2bb642d3e7987a"),
+            "ORCA" => Some("0x37505261e557e251290b8c8899453064e8d760ed5c65a779726f2490980da74c"),
+            "DRIFT" => Some("0x5c1690b27bb02446db17cdda13ccc2c1d609ad6d2ef5bf4983a85ea8b6f19d07"),
+            
+            // Liquid Staking
+            "JTO" => Some("0xb43660a5f790c69354b0729a5ef9d50d68f1df92107540210b9cccba1f947cc2"),
+
+            // Meme Coins
+            "BONK" => Some("0x72b021217ca3fe68922a19aaf990109cb9d84e9ad004b4d2025ad6f529314419"),
+            "WIF" => Some("0x4ca4beeca86f0d164160323817a4e42b10010a724c2217c6ee41b54cd4cc61fc"),
+            "MOODENG" => Some("0xffff73128917a90950cd0473fd2551d7cd274fd5a6cc45641881bbcc6ee73417"),
+            "PNUT" => Some("0x116da895807f81f6b5c5f01b109376e7f6834dc8b51365ab7cdfa66634340e54"),
+            "GOAT" => Some("0xf7731dc812590214d3eb4343bfb13d1b4cfa9b1d4e020644b5d5d8e07d60c66c"),
+
+            // Infrastructure / Stable
+            "PYTH" => Some("0x0bbf28e9a841a1cc788f6a361b17ca072d0ea3098a1e5df1c3922d06719579ff"),
+            "LINK" => Some("0x8ac0c70fff57e9aefdf5edf44b51d62c2d433653cbb2cf5cc06bb115af04d221"),
             "USDC" => Some("0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a"),
             "USDT" => Some("0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b"),
             _ => None,
         }
     }
 
-    /// Fetch the latest price for a token from Pyth Network.
-    ///
-    /// This queries the Pyth Hermes API for the most recent price update. Pyth prices
-    /// are typically updated sub-second and include confidence intervals.
-    ///
-    /// # Price Encoding
-    /// Pyth encodes prices as `raw_price * 10^expo` where:
-    /// - `raw_price` is an integer (e.g., 14550)
-    /// - `expo` is typically negative (e.g., -2)
-    /// - Final price = 14550 * 10^(-2) = $145.50
-    ///
-    /// # Arguments
-    /// * `symbol` - Token symbol (e.g., "SOL", "BTC")
-    ///
-    /// # Returns
-    /// * `Ok(price)` - Current price in USD
-    /// * `Err(_)` - Unknown symbol, API failure, or parse error
-    ///
-    /// # Example
-    /// ```no_run
-    /// let price = client.get_price("SOL").await?;
-    /// println!("SOL: ${:.2}", price);
-    /// ```
+    /// Fetch the latest price for a token from Pyth Network Hermes V2.
     pub async fn get_price(&self, symbol: &str) -> Result<f64> {
         let feed_id = self
             .symbol_to_price_feed_id(symbol)
             .ok_or_else(|| anyhow::anyhow!("No Pyth feed for symbol: {}", symbol))?;
 
-        let url = format!("{}/api/latest_price_feeds?ids[]={}", self.hermes_url, feed_id);
+        let clean_id = feed_id.strip_prefix("0x").unwrap_or(feed_id);
+        let mut url = format!("{}?ids[]={}", self.hermes_url, clean_id);
+        
+        if let Some(ref key) = self.api_key {
+            url.push_str(&format!("&api_key={}", key));
+        }
 
-        debug!("Fetching Pyth price for {} (feed: {})", symbol, &feed_id[..8]);
+        #[derive(Debug, Deserialize)]
+        struct HermesV2Response {
+            parsed: Vec<ParsedPrice>,
+        }
 
-        let response: Vec<ParsedPrice> = self
+        debug!("Fetching Pyth V2 price for {} (feed: {})", symbol, &clean_id[..8]);
+
+        let response: HermesV2Response = self
             .http
             .get(&url)
             .send()
-            .await
-            .map_err(|e| {
-                warn!("Pyth Hermes API request failed for {}: {}", symbol, e);
-                anyhow::anyhow!("Pyth API request failed: {}", e)
-            })?
+            .await?
             .json()
-            .await
-            .map_err(|e| {
-                warn!("Pyth Hermes API parse failed for {}: {}", symbol, e);
-                anyhow::anyhow!("Pyth API parse failed: {}", e)
-            })?;
+            .await?;
 
-        let parsed = response
+        let parsed = response.parsed
             .first()
-            .ok_or_else(|| anyhow::anyhow!("No price data in Pyth response"))?;
+            .ok_or_else(|| anyhow::anyhow!("No price data in Pyth Hermes V2 response"))?;
 
-        // Convert price string to f64 and apply exponent
-        // Pyth prices are encoded as: price = raw_price * 10^expo
         let price_raw: i64 = parsed.price.price.parse()?;
         let expo = parsed.price.expo;
         let price = (price_raw as f64) * 10_f64.powi(expo);
 
-        debug!("Pyth LIVE: {} = ${:.4} (raw: {}, expo: {})", symbol, price, price_raw, expo);
+        debug!("Pyth V2 LIVE: {} = ${:.4}", symbol, price);
         Ok(price)
     }
 
-    /// Fetch prices for multiple tokens, returning only successful fetches.
-    ///
-    /// This method fetches prices sequentially for each symbol. Failed fetches
-    /// are logged as warnings but don't affect other symbols.
-    ///
-    /// # Arguments
-    /// * `symbols` - Slice of token symbols to fetch
-    ///
-    /// # Returns
-    /// HashMap with successful price fetches. Failed fetches are omitted.
-    ///
-    /// # Example
-    /// ```no_run
-    /// let prices = client.get_prices(&["SOL", "BTC", "ETH"]).await;
-    /// println!("Fetched {} prices from Pyth", prices.len());
-    /// ```
+    /// Fetch prices for multiple tokens.
     pub async fn get_prices(&self, symbols: &[&str]) -> HashMap<String, f64> {
         let mut prices = HashMap::new();
-
         for symbol in symbols {
-            match self.get_price(symbol).await {
-                Ok(price) => {
-                    prices.insert(symbol.to_string(), price);
-                }
-                Err(e) => {
-                    warn!("Failed to get Pyth price for {}: {}", symbol, e);
-                }
+            if let Ok(price) = self.get_price(symbol).await {
+                prices.insert(symbol.to_string(), price);
             }
         }
-
         prices
     }
 }
 
 impl Default for PythClient {
     fn default() -> Self {
-        // Safe to unwrap here because we want the default to panic if HTTP client fails
-        // This is acceptable for Default trait as it indicates a fundamental system issue
-        Self::new().expect("Failed to create default PythClient")
+        Self::new(None).expect("Failed to create default PythClient")
     }
 }

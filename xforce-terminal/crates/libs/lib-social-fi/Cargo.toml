@@ -1,0 +1,37 @@
+[package]
+name = "lib-social-fi"
+version = "0.1.0"
+edition = "2021"
+description = "Social-Fi P2P messaging and resource sharing library for XForce"
+
+[dependencies]
+# Core dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+bytes = "1"
+
+# Solana dependencies
+solana-sdk = { workspace = true }
+
+# P2P dependencies (from references)
+braid-iroh = { path = "../../../../references/social-fi/braid-reborn/braid-iroh" }
+braid_http_rs = { package = "braid-core", path = "../../../../references/social-fi/braid-reborn/braid-core", features = [
+    "server",
+    "client",
+] }
+iroh = "0.96.1"
+sha2 = "0.10"
+
+# Database
+rusqlite = { version = "0.32.1", features = ["bundled"] }
+
+# Internal dependencies
+lib-core = { path = "../lib-core" }
+lib-strategy = { path = "../lib-strategy" }
+lib-utils = { path = "../lib-utils" }

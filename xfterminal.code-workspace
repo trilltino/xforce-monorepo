@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "xforce-crypto-info",
+      "path": "xforce-crypto-info"
+    },
+    {
+      "name": "xforce-terminal",
+      "path": "xforce-terminal"
+    },
+    {
+      "name": "xforce-terminal-contracts",
+      "path": "xforce-terminal-contracts"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true
+    }
+  }
+}

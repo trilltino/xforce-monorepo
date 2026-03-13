@@ -11,7 +11,7 @@ lib-core = { workspace = true }
 tokio = { workspace = true }
 
 # Database - use 0.6 for compatibility
-sqlx = { version = "0.6", features = ["runtime-tokio", "sqlite", "chrono"] }
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite", "chrono"] }
 
 # Error handling
 anyhow = "1"

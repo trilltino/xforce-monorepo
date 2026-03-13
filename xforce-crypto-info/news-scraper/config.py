@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 load_dotenv()
 
 # Database configuration
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/news_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///../news.db")
 
 # API keys
 NEWSAPI_KEY = os.getenv("NEWSAPI_KEY", "")

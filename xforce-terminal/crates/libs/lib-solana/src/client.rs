@@ -91,13 +91,21 @@ impl SolanaClient {
         }
     }
 
-    pub async fn get_account(&self, pubkey: &Pubkey) -> anyhow::Result<solana_sdk::account::Account> {
-        self.rpc.get_account(pubkey).await
+    pub async fn get_account(
+        &self,
+        pubkey: &Pubkey,
+    ) -> anyhow::Result<solana_sdk::account::Account> {
+        self.rpc
+            .get_account(pubkey)
+            .await
             .map_err(|e| anyhow::anyhow!("RPC error: {}", e))
     }
 
     pub async fn get_epoch_info(&self) -> anyhow::Result<EpochInfo> {
-        let info = self.rpc.get_epoch_info().await
+        let info = self
+            .rpc
+            .get_epoch_info()
+            .await
             .map_err(|e| anyhow::anyhow!("Failed to get epoch info: {}", e))?;
 
         Ok(EpochInfo {
@@ -108,7 +116,9 @@ impl SolanaClient {
     }
 
     pub async fn health_check(&self) -> anyhow::Result<()> {
-        self.rpc.get_version().await
+        self.rpc
+            .get_version()
+            .await
             .map_err(|e| anyhow::anyhow!("Health check failed: {}", e))?;
         Ok(())
     }
@@ -117,22 +127,33 @@ impl SolanaClient {
         &self.network
     }
 
-    pub async fn send_transaction(&self, transaction: &solana_sdk::transaction::Transaction) -> anyhow::Result<String> {
-        let signature = self.rpc.send_and_confirm_transaction(transaction).await
+    pub async fn send_transaction(
+        &self,
+        transaction: &solana_sdk::transaction::Transaction,
+    ) -> anyhow::Result<String> {
+        let signature = self
+            .rpc
+            .send_and_confirm_transaction(transaction)
+            .await
             .map_err(|e| anyhow::anyhow!("Failed to send transaction: {}", e))?;
         Ok(signature.to_string())
     }
 
     pub async fn get_latest_blockhash(&self) -> anyhow::Result<solana_sdk::hash::Hash> {
-        self.rpc.get_latest_blockhash().await
+        self.rpc
+            .get_latest_blockhash()
+            .await
             .map_err(|e| anyhow::anyhow!("Failed to get blockhash: {}", e))
     }
 
     pub async fn get_signatures_for_address(
         &self,
         pubkey: &Pubkey,
-    ) -> anyhow::Result<Vec<solana_client::rpc_response::RpcConfirmedTransactionStatusWithSignature>> {
-        self.rpc.get_signatures_for_address(pubkey).await
+    ) -> anyhow::Result<Vec<solana_client::rpc_response::RpcConfirmedTransactionStatusWithSignature>>
+    {
+        self.rpc
+            .get_signatures_for_address(pubkey)
+            .await
             .map_err(|e| anyhow::anyhow!("Failed to get signatures: {}", e))
     }
 }

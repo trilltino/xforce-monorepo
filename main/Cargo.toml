@@ -1,0 +1,34 @@
+[package]
+name = "xfterminal"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Main entry point for XForce Terminal - CLI and service orchestrator"
+
+[[bin]]
+name = "xfterminal"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+
+# Internal dependencies
+lib-core = { workspace = true }
+lib-auth = { workspace = true }
+lib-web = { workspace = true }
+lib-solana = { workspace = true }
+lib-utils = { workspace = true }
+
+# CLI
+clap = { version = "4.5.16", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+
+# Error handling
+anyhow = "1.0.102"

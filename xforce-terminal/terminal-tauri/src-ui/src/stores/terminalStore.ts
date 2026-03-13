@@ -21,12 +21,30 @@ export interface WalletState {
   balance: number;
 }
 
-export type Screen = 'terminal' | 'wallet' | 'settings';
+export type Screen = 'terminal' | 'wallet' | 'social' | 'settings' | 'prices' | 'reader';
+
+export interface CustomTheme {
+  backgroundColor: string;
+  textColor: string;
+  accentColor: string;
+  panelColor: string;
+  fontFamily: string;
+  fontSize: number;
+}
 
 interface TerminalState {
   // Navigation
   currentScreen: Screen;
   setScreen: (screen: Screen) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (auth: boolean) => void;
+  isLightMode: boolean;
+  setIsLightMode: (light: boolean) => void;
+  
+  // Custom theme
+  customTheme: CustomTheme;
+  setCustomTheme: (theme: CustomTheme) => void;
+  resetTheme: () => void;
   
   // Market data
   prices: PriceData[];
@@ -53,34 +71,74 @@ interface TerminalState {
   // Loading states
   isLoadingPrices: boolean;
   setIsLoadingPrices: (loading: boolean) => void;
+  
+  // Reader
+  activeArticleUrl: string | null;
+  setArticleUrl: (url: string | null) => void;
 }
 
-export const useTerminalStore = create<TerminalState>((set) => ({
+const defaultDarkTheme: CustomTheme = {
+  backgroundColor: '#0a0a0a',
+  textColor: '#00ff41',
+  accentColor: '#00ff41',
+  panelColor: '#111111',
+  fontFamily: 'JetBrains Mono, monospace',
+  fontSize: 14,
+};
+
+const defaultLightTheme: CustomTheme = {
+  backgroundColor: '#ffffff',
+  textColor: '#1a1a1a',
+  accentColor: '#0066cc',
+  panelColor: '#f5f5f5',
+  fontFamily: 'JetBrains Mono, monospace',
+  fontSize: 14,
+};
+
+export const useTerminalStore = create<TerminalState>((set, get) => ({
   currentScreen: 'terminal',
   setScreen: (screen) => set({ currentScreen: screen }),
-  
+  isAuthenticated: false,
+  setIsAuthenticated: (auth) => set({ isAuthenticated: auth }),
+  isLightMode: false,
+  setIsLightMode: (light) => {
+    set({ isLightMode: light });
+    if (light) {
+      set({ customTheme: defaultLightTheme });
+    } else {
+      set({ customTheme: defaultDarkTheme });
+    }
+  },
+
+  customTheme: defaultDarkTheme,
+  setCustomTheme: (theme) => set({ customTheme: theme }),
+  resetTheme: () => set({ customTheme: get().isLightMode ? defaultLightTheme : defaultDarkTheme }),
+
   prices: [],
   setPrices: (prices) => set({ prices }),
   selectedToken: 'SOL',
   setSelectedToken: (token) => set({ selectedToken: token }),
-  
+
   tokens: [],
   setTokens: (tokens) => set({ tokens }),
-  
+
   wallet: {
     connected: false,
     publicKey: null,
     balance: 0,
   },
   setWallet: (wallet) => set({ wallet }),
-  
+
   swapFrom: null,
   swapTo: null,
   swapAmount: '',
   setSwapFrom: (token) => set({ swapFrom: token }),
   setSwapTo: (token) => set({ swapTo: token }),
   setSwapAmount: (amount) => set({ swapAmount: amount }),
-  
+
   isLoadingPrices: false,
   setIsLoadingPrices: (loading) => set({ isLoadingPrices: loading }),
+
+  activeArticleUrl: null,
+  setArticleUrl: (url) => set({ activeArticleUrl: url }),
 }));

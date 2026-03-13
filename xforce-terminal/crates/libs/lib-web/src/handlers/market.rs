@@ -286,17 +286,12 @@ pub async fn get_candles(
     );
     
     if candles.is_empty() {
-        warn!(
+        info!(
             symbol = %params.symbol,
             timeframe = %params.timeframe,
-            "No candles available for symbol"
+            "No candles available for symbol, returning empty array"
         );
-        return Err((
-            StatusCode::NOT_FOUND,
-            Json(ErrorResponse {
-                error: format!("No candles available for symbol: {}", params.symbol),
-            }),
-        ));
+        return Ok((StatusCode::OK, Json(Vec::new())));
     }
     
     // Convert internal Candle to shared OHLC

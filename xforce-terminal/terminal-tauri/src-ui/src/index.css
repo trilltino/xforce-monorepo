@@ -1,10 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --terminal-bg: #000000;
+  --terminal-panel: #000000;
+  --terminal-border: #ffffff;
+  --terminal-text: #ffffff;
+  --terminal-muted: #888888;
+  --terminal-accent: #ffffff;
+  --terminal-success: #ffffff;
+  --terminal-danger: #ffffff;
+  --terminal-warning: #ffffff;
+}
+
+.light-mode {
+  --terminal-bg: #ffffff;
+  --terminal-panel: #ffffff;
+  --terminal-border: #000000;
+  --terminal-text: #000000;
+  --terminal-muted: #666666;
+  --terminal-accent: #000000;
+  --terminal-success: #000000;
+  --terminal-danger: #000000;
+  --terminal-warning: #000000;
+}
 @layer base {
   * {
-    @apply border-terminal-border;
+    border-color: var(--terminal-border);
   }
   
   html, body, #root {
@@ -12,8 +36,9 @@
   }
   
   body {
-    @apply bg-terminal-bg text-terminal-text font-mono text-sm;
-    @apply antialiased;
+    background-color: var(--terminal-bg);
+      color: var(--terminal-text);
+      @apply font-sans text-sm antialiased transition-colors duration-200;
   }
 }
 
@@ -28,19 +53,23 @@
   }
   
   .btn-primary {
-    @apply btn bg-terminal-accent hover:bg-blue-600 text-white;
+    @apply btn border-terminal-border bg-terminal-text text-terminal-bg hover:opacity-90;
+      background-color: var(--terminal-text);
+      color: var(--terminal-bg);
   }
   
   .btn-secondary {
-    @apply btn bg-terminal-panel hover:bg-terminal-border border border-terminal-border;
+    @apply btn bg-transparent border border-terminal-border text-terminal-text hover:bg-terminal-text hover:text-terminal-bg;
   }
   
   .btn-success {
-    @apply btn bg-terminal-success hover:bg-emerald-600 text-white;
+    @apply btn bg-terminal-text text-terminal-bg border border-terminal-border font-bold;
+      background-color: var(--terminal-text);
+      color: var(--terminal-bg);
   }
   
   .btn-danger {
-    @apply btn bg-terminal-danger hover:bg-red-600 text-white;
+    @apply btn border-terminal-border text-terminal-text hover:bg-terminal-text hover:text-terminal-bg italic;
   }
   
   .input {

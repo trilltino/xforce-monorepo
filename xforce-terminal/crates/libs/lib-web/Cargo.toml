@@ -8,6 +8,7 @@ edition = "2021"
 lib-core = { workspace = true }
 lib-auth = { workspace = true }
 lib-solana = { workspace = true }
+lib-social-fi = { path = "../lib-social-fi" }
 
 # Web framework
 axum = { version = "0.8", features = ["ws"] }
@@ -41,17 +42,21 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 # Database - use 0.6 for compatibility
-sqlx = { version = "0.6", features = ["runtime-tokio", "sqlite", "chrono"] }
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite", "chrono"] }
 
 # Environment variables
 dotenvy = "0.15"
 
 # Solana SDK
-solana-sdk = "1.16"
+solana-sdk = { workspace = true }
+bs58 = "0.5.1"
 
 # Serialization/Encoding
-base64 = "0.22"
+base64 = "0.22.1"
 bincode = "1.3"
 
 # Time
 chrono = { workspace = true }
+
+[features]
+genai = []
