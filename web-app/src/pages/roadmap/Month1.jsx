@@ -1,111 +1,113 @@
-const roadmapItems = [
-    {
-        title: "UI/UX Enhancements & Minimal Beta Release",
-        icon: "🎨",
-        items: [
-            "Polish core trading interface (terminal, wallet, transactions screens)",
-            "Release minimal Beta v0.1.0 with core features: authentication, wallet connection, basic swaps, real-time price feeds, messaging and batch swapping",
-            "Performance optimizations for Beta release"
-        ]
-    },
-    {
-        title: "SuperteamUK Participation",
-        icon: "🤝",
-        items: [
-            "Attend SuperteamUK events in London",
-            "Present XForce Terminal demos",
-            "Network with Solana developers and ecosystem participants",
-            "Collect feedback and potential partnerships"
-        ]
-    },
-    {
-        title: "Documentation & Content",
-        icon: "📚",
-        items: [
-            "Complete usage manual covering installation, wallet setup, trading workflows, and troubleshooting",
-            "Complete feature manual documenting all Beta features, keyboard shortcuts, and advanced functionality",
-            "Publish 3 technical blog posts: Building Native DeFi Apps with Rust, Non-Custodial Architecture, CRDT-Based Messaging"
-        ]
-    },
-    {
-        title: "Waitlist & Community Building",
-        icon: "👥",
-        items: [
-            "Launch waitlist signup page",
-            "Implement waitlist management system",
-            "Create landing page with Beta signup CTA"
-        ]
-    }
-];
+import { Link } from 'react-router-dom';
 
 export default function Month1() {
     return (
         <div className="max-w-6xl mx-auto py-8 px-4">
             {/* Header */}
             <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full mb-4">
-                    <span className="text-white font-bold text-2xl">1</span>
-                </div>
+                <Link to="/roadmap" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-500 mb-4">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Roadmap
+                </Link>
                 <h1 className="text-5xl font-bold mb-4 font-heading bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                    Milestone 1 - Month 1
+                    Month 1
                 </h1>
-                <p className="text-2xl text-gray-600 dark:text-gray-400 mb-2 font-sans">$2,500</p>
-                <p className="text-lg text-gray-500 dark:text-gray-500 font-sans">
-                    UI/UX polish, minimal Beta release, community engagement, and documentation
+                <p className="text-2xl text-gray-600 dark:text-gray-400 mb-2 font-sans">625 USDC</p>
+                <p className="text-xl text-gray-500 dark:text-gray-500 font-sans">
+                    Geyser Integration & Beta Release
                 </p>
             </div>
 
-            {/* Main Content */}
+            {/* Success Criteria */}
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border border-primary-200 dark:border-primary-700 rounded-xl p-6 mb-8">
+                <h2 className="text-2xl font-bold mb-4 text-primary-800 dark:text-primary-200">Success Criteria</h2>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                    <li>Geyser pipeline live and sub-100ms delivery benchmarked</li>
+                    <li>Beta v0.1.0 released</li>
+                    <li>50+ downloads</li>
+                    <li>100+ waitlist signups</li>
+                    <li>3 articles published</li>
+                </ul>
+            </div>
+
+            {/* Milestones */}
             <div className="space-y-8">
-                {roadmapItems.map((section) => (
-                    <div key={section.title} className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <div className="flex items-center mb-6">
-                            <div className="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mr-4">
-                                <span className="text-2xl">{section.icon}</span>
-                            </div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white font-heading">{section.title}</h2>
-                        </div>
-                        <ul className="space-y-4 text-gray-600 dark:text-gray-300 font-sans">
-                            {section.items.map((item, idx) => (
-                                <li key={idx} className="flex items-start">
-                                    <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {/* Milestone 1.1 */}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 1.1 — Yellowstone Geyser gRPC Pipeline</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        Replace standard RPC polling with a production Yellowstone Geyser gRPC pipeline. Current RPC polling delivers market data in 2-5 seconds. Geyser delivers sub-100ms streaming directly from validator state.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Geyser gRPC client built in Rust using Tonic</li>
+                        <li>Account subscription filter for user-relevant accounts only (micro-indexing)</li>
+                        <li>Shadow state reconciliation — Geyser feed synced against RPC for consistency</li>
+                        <li>WebSocket streaming layer delivering real-time data to terminal UI</li>
+                        <li>Benchmark documented: RPC polling latency vs Geyser latency, verified in production</li>
+                    </ul>
+                </div>
 
-                {/* Metrics & Success Criteria */}
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-heading">Metrics</h3>
-                        <ul className="space-y-3 text-gray-600 dark:text-gray-300 font-sans">
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Beta downloads: 50+ users</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Waitlist signups: 100+ signups</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Blog posts: 3 published</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Documentation completed</li>
-                        </ul>
+                {/* Milestone 1.2 */}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 1.2 — Multi-Source Price Fallback Chain</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Primary: Geyser real-time feeds</li>
+                        <li>Secondary: Pyth Network oracles</li>
+                        <li>Tertiary: Jupiter aggregator</li>
+                        <li>Automatic failover with zero user-visible disruption</li>
+                        <li>Staleness detection — feeds older than configurable threshold trigger fallback</li>
+                    </ul>
+                </div>
+
+                {/* Milestone 1.3 */}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 1.3 — Beta v0.1.0 Release</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Wallet connection: Phantom, Solflare, Backpack</li>
+                        <li>Real-time price feeds via Geyser pipeline</li>
+                        <li>Basic swap execution via Jupiter aggregator</li>
+                        <li>WebSocket streaming price charts</li>
+                        <li>JWT authentication and session management</li>
+                    </ul>
+                </div>
+
+                {/* Milestone 1.4 */}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 1.4 — RPC Infrastructure Hardening</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Connection pooling — 100+ concurrent RPC connections</li>
+                        <li>Exponential backoff retry logic across mainnet and devnet</li>
+                        <li>Circuit breakers — automatic failover on degraded performance</li>
+                        <li>Local caching of frequently accessed account data</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Articles */}
+            <div className="mt-12">
+                <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Month 1 Articles</h2>
+                <div className="space-y-6">
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 1: Building Sub-100ms Market Data Infrastructure on Solana</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Complete walkthrough of replacing RPC polling with Yellowstone Geyser gRPC. Tonic client setup in Rust, account subscription filtering, shadow state reconciliation, WebSocket delivery layer. Before/after latency benchmarks and full implementation included.
+                        </p>
                     </div>
 
-                    <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-heading">Success Criteria</h3>
-                        <ul className="space-y-3 text-gray-600 dark:text-gray-300 font-sans">
-                            <li className="flex items-start">
-                                <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span>Beta v0.1.0 released with core functionality</span>
-                            </li>
-                            <li className="flex items-start">
-                                <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span>Active community engagement</span>
-                            </li>
-                        </ul>
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 2: Non-Custodial Architecture in Practice — How XForce Terminal Works</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            The architectural decisions behind a trading terminal where the application never holds user keys or funds. Wallet adapter integration, transaction signing flows, and the full threat model.
+                        </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 3: Multi-Source Price Feeds with Automatic Failover</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Deep dive into the fallback chain — Geyser primary, Pyth secondary, Jupiter tertiary. Staleness detection, failover triggers, and building production-grade data reliability without centralised oracle dependency.
+                        </p>
                     </div>
                 </div>
             </div>

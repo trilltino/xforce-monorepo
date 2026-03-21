@@ -1,120 +1,110 @@
-const roadmapItems = [
-    {
-        title: "Advanced Features & Beta v0.2.0 Release",
-        icon: "⚡",
-        items: [
-            "Integrate AI assistant using rust-genai (DeepSeek, OpenAI, Anthropic, Gemini support)",
-            "Enhance SociaFI messaging with full CRDT implementation and conflict resolution",
-            "Advanced charting: candlestick charts, technical indicators, multiple timeframes",
-            "Portfolio analytics: P&L tracking, performance metrics, trade history analysis",
-            "Batch swap router contract deployment and integration"
-        ]
-    },
-    {
-        title: "REST API Development",
-        icon: "🔌",
-        items: [
-            "Design and implement REST API endpoints for trading operations",
-            "Example trading bot integrations (Python, JavaScript, Rust)"
-        ]
-    },
-    {
-        title: "Software Development & Performance",
-        icon: "💻",
-        items: [
-            "Address Beta v0.1.0 user feedback and bug fixes",
-            "Performance optimizations: reduce memory footprint, improve WebSocket latency",
-            "Code review, dependency scanning",
-            "Enhanced error handling and user feedback systems"
-        ]
-    },
-    {
-        title: "Community Growth & Partnerships",
-        icon: "🌱",
-        items: [
-            "Launch developer program with API access for early adopters",
-            "Engage with Solana developer communities (SuperteamUK)"
-        ]
-    },
-    {
-        title: "Documentation & Content",
-        icon: "📝",
-        items: [
-            "API documentation: endpoints, authentication, rate limits, examples",
-            "Developer guide: building trading bots, integrating with XForce Terminal",
-            "Publish 3 technical blog posts: Building Trading Bots, CRDT Conflict Resolution, Rust-GenAI Integration"
-        ]
-    }
-];
+import { Link } from 'react-router-dom';
 
 export default function Month2() {
     return (
         <div className="max-w-6xl mx-auto py-8 px-4">
             {/* Header */}
             <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full mb-4">
-                    <span className="text-white font-bold text-2xl">2</span>
-                </div>
+                <Link to="/roadmap" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-500 mb-4">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Roadmap
+                </Link>
                 <h1 className="text-5xl font-bold mb-4 font-heading bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                    Milestone 2 - Month 2
+                    Month 2
                 </h1>
-                <p className="text-2xl text-gray-600 dark:text-gray-400 mb-2 font-sans">$2,500</p>
-                <p className="text-lg text-gray-500 dark:text-gray-500 font-sans">
-                    Advanced features, API infrastructure, community growth, and ecosystem integration
+                <p className="text-2xl text-gray-600 dark:text-gray-400 mb-2 font-sans">625 USDC</p>
+                <p className="text-xl text-gray-500 dark:text-gray-500 font-sans">
+                    Pinocchio Optimisation & SocialFi Layer
                 </p>
             </div>
 
-            {/* Main Content */}
+            {/* Success Criteria */}
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border border-primary-200 dark:border-primary-700 rounded-xl p-6 mb-8">
+                <h2 className="text-2xl font-bold mb-4 text-primary-800 dark:text-primary-200">Success Criteria</h2>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                    <li>Pinocchio batch swap router on devnet, 30% CU reduction verified</li>
+                    <li>SocialFi layer live in Beta v0.2.0</li>
+                    <li>E2EE operational</li>
+                    <li>20+ developer signups</li>
+                    <li>3 articles published</li>
+                </ul>
+            </div>
+
+            {/* Milestones */}
             <div className="space-y-8">
-                {roadmapItems.map((section) => (
-                    <div key={section.title} className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <div className="flex items-center mb-6">
-                            <div className="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mr-4">
-                                <span className="text-2xl">{section.icon}</span>
-                            </div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white font-heading">{section.title}</h2>
-                        </div>
-                        <ul className="space-y-4 text-gray-600 dark:text-gray-300 font-sans">
-                            {section.items.map((item, idx) => (
-                                <li key={idx} className="flex items-start">
-                                    <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 2.1 — Pinocchio Batch Swap Router</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        Convert the Anchor batch swap router to Pinocchio — zero-copy, no-std, direct SVM syscalls — achieving 30% compute unit reduction on every batch swap.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Zero-copy account deserialization using bytemuck</li>
+                        <li>Manual account discriminator validation and ownership checks</li>
+                        <li>Atomic execution across multiple DEXs in a single transaction</li>
+                        <li>Slippage protection at the instruction level</li>
+                        <li>Deploy to devnet — program address documented and verifiable</li>
+                        <li>CU benchmark: Anchor baseline vs Pinocchio, every swap type tested</li>
+                    </ul>
+                </div>
 
-                {/* Metrics & Success Criteria */}
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-heading">Metrics</h3>
-                        <ul className="space-y-3 text-gray-600 dark:text-gray-300 font-sans">
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>API integrations: 3+ trading bots</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Developer signups: 20+ developers</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Blog posts: 3 published</li>
-                            <li className="flex items-center"><span className="text-primary-500 mr-2">•</span>Beta v0.2.0 released</li>
-                        </ul>
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 2.2 — SocialFi Layer: Iroh P2P + Braid Protocol</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        Replace centralised chat with a fully decentralised P2P messaging layer. Identity is an Ed25519 keypair — the same keypair as a Solana wallet. No server holds messages.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Iroh QUIC transport — NAT traversal, direct peer connections</li>
+                        <li>Gossip protocol for message propagation</li>
+                        <li>Braid CRDT-based conflict-free state sync</li>
+                        <li>Braid patches hashed (SHA256) and written to Solana PDA — local state anchored on-chain</li>
+                        <li>NodeID = Solana keypair — same Ed25519 key, no identity bridging required</li>
+                    </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 2.3 — p2panda Encryption & Group Management</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>p2panda-auth: cryptographic group management, decentralised RBAC</li>
+                        <li>p2panda-encryption: Double Ratchet E2EE for direct and group messaging</li>
+                        <li>Group creation, member addition/removal, key rotation — all on-chain verifiable</li>
+                    </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Milestone 2.4 — Bags SDK Integration</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>Token gating — earned tokens unlock advanced terminal features</li>
+                        <li>Tipping infrastructure — P2P value transfer between terminal users</li>
+                        <li>On-chain identity linked to social graph</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Articles */}
+            <div className="mt-12">
+                <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Month 2 Articles</h2>
+                <div className="space-y-6">
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 4: Pinocchio vs Anchor — A Complete Performance Comparison</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            The definitive reference for understanding the performance difference between Anchor and Pinocchio. Zero-copy deserialization, direct syscall usage, Anchor discriminator overhead removal, manual account validation patterns. Full batch swap router implementation, CU benchmarks for every operation, and a migration guide.
+                        </p>
                     </div>
 
-                    <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-heading">Success Criteria</h3>
-                        <ul className="space-y-3 text-gray-600 dark:text-gray-300 font-sans">
-                            <li className="flex items-start">
-                                <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span>REST API functional with documentation</span>
-                            </li>
-                            <li className="flex items-start">
-                                <svg className="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span>AI assistant integrated and functional</span>
-                            </li>
-                        </ul>
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 5: Building a Decentralised SocialFi Layer with Iroh and Braid</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            How to replace centralised messaging with a P2P stack running in a Tauri desktop application. Iroh QUIC transport, gossip propagation, Braid CRDT sync, Ed25519 NodeIDs mapped to Solana keypairs, CRDT patches anchored on-chain via PDAs. Full Rust implementation.
+                        </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+                        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Article 6: End-to-End Encryption in Rust — p2panda Double Ratchet Implementation</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Practical guide to implementing the Signal Double Ratchet protocol in Rust using p2panda. Key generation, ratchet advancement, group key management via RBAC, integration with Iroh transport. Full threat model explained.
+                        </p>
                     </div>
                 </div>
             </div>

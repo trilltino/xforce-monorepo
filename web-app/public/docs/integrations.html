@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XForce Terminal - How They Connect</title>
+    <title>XFTerminal - How They Connect</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>XForce Terminal Architecture</h1>
+        <h1>XFTerminal Architecture</h1>
         <p>How Everything Works Together - Explained Simply</p>
     </header>
 
@@ -109,21 +109,111 @@
             </div>
 
             <div class="integration-point">
-                <h4>🔄 Terminal ↔ Jupiter: Price Finding Service</h4>
+                <h4>� Terminal ↔ Astralane IRIS: High-Speed Transaction Sender</h4>
                 <p>
-                    <strong>How they connect:</strong> The terminal asks Jupiter (a DEX aggregator) for the best swap prices. 
-                    Jupiter checks all the different exchanges on Solana and tells you which one has the best deal.
+                    <strong>How they connect:</strong> Terminal uses Astralane's IRIS transaction sender for ultra-fast Solana transaction submission. 
+                    IRIS is optimized for high-frequency trading with minimal latency.
                 </p>
                 <p>
-                    <strong>What this means:</strong> When you want to swap tokens, the terminal doesn't just pick a random exchange. 
-                    It asks Jupiter "where can I get the best price for this swap?" and Jupiter responds with the optimal route, 
-                    which might involve multiple exchanges to get you the best deal.
+                    <strong>What this means:</strong> When executing trades, the terminal leverages IRIS's optimized transaction 
+                    sending capabilities to achieve sub-second execution times, crucial for HFT strategies.
+                </p>
+                <ul>
+                    <li><strong>Type of connection:</strong> Rust library integration</li>
+                    <li><strong>What IRIS does:</strong> Fast, lightweight Solana transaction sender</li>
+                    <li><strong>Why it's good:</strong> Optimized for speed, minimal latency, built for HFT</li>
+                </ul>
+                <img src="/xfterminal/images/astralane-iris.webp" alt="Astralane IRIS Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
+            </div>
+
+            <div class="integration-point">
+                <h4>🏛️ Terminal ↔ Solana Program Library: Token Infrastructure</h4>
+                <p>
+                    <strong>How they connect:</strong> Terminal integrates with SPL programs for comprehensive token operations. 
+                    SPL provides the foundational token infrastructure on Solana.
+                </p>
+                <p>
+                    <strong>What this means:</strong> All token operations - transfers, swaps, metadata, associated token accounts - 
+                    are handled through battle-tested SPL programs, ensuring compatibility and security.
+                </p>
+                <ul>
+                    <li><strong>Type of connection:</strong> On-chain program interactions</li>
+                    <li><strong>What SPL provides:</strong> Token, Associated Token, Metadata, Governance programs</li>
+                    <li><strong>Why it's good:</strong> Industry standard, audited, comprehensive token features</li>
+                </ul>
+                <img src="/xfterminal/images/spl-bags.webp" alt="Solana Program Library Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
+            </div>
+
+            <div class="integration-point">
+                <h4>🌋 Terminal ↔ Geyser: Real-Time Data Streaming</h4>
+                <p>
+                    <strong>How they connect:</strong> Terminal connects to Geyser for real-time blockchain data streaming. 
+                    Geyser provides instant updates on account changes, transactions, and program state.
+                </p>
+                <p>
+                    <strong>What this means:</strong> Terminal receives real-time market data, balance updates, and transaction 
+                    confirmations instantly through Geyser's streaming API, enabling responsive trading interfaces.
+                </p>
+                <ul>
+                    <li><strong>Type of connection:</strong> WebSocket streaming API</li>
+                    <li><strong>What Geyser does:</strong> Real-time blockchain data streaming</li>
+                    <li><strong>Why it's good:</strong> Instant updates, low latency, comprehensive data coverage</li>
+                </ul>
+                <img src="/xfterminal/images/geyser.webp" alt="Geyser Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
+            </div>
+
+            <div class="integration-point">
+                <h4>🪐 Terminal ↔ Jupiter: DEX Aggregation</h4>
+                <p>
+                    <strong>How they connect:</strong> Terminal integrates Jupiter's swap API for optimal DEX routing. 
+                    Jupiter finds the best prices across all Solana decentralized exchanges.
+                </p>
+                <p>
+                    <strong>What this means:</strong> When executing trades, Terminal queries Jupiter to find the most efficient 
+                    routing across multiple DEXs, ensuring users get the best possible prices with minimal slippage.
                 </p>
                 <ul>
                     <li><strong>Type of connection:</strong> HTTP API calls</li>
-                    <li><strong>What Jupiter does:</strong> Finds best prices across all Solana DEXs</li>
-                    <li><strong>Why it's good:</strong> You always get the best price, saves you money automatically</li>
+                    <li><strong>What Jupiter does:</strong> DEX aggregation and optimal routing</li>
+                    <li><strong>Why it's good:</strong> Best prices, reduced slippage, multi-DEX coverage</li>
                 </ul>
+                <img src="/xfterminal/images/jupiter.webp" alt="Jupiter Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
+            </div>
+
+            <div class="integration-point">
+                <h4>🪵 Terminal ↔ Pinocchio: Lightweight Program Development</h4>
+                <p>
+                    <strong>How they connect:</strong> Terminal can deploy and interact with programs built using Pinocchio. 
+                    Pinocchio enables ultra-lightweight Solana programs with no external dependencies.
+                </p>
+                <p>
+                    <strong>What this means:</strong> Custom trading programs and strategies can be deployed using Pinocchio's 
+                    optimized framework, resulting in smaller binaries and lower compute costs.
+                </p>
+                <ul>
+                    <li><strong>Type of connection:</strong> On-chain program deployment and interaction</li>
+                    <li><strong>What Pinocchio does:</strong> No-dependency Solana program framework</li>
+                    <li><strong>Why it's good:</strong> Minimal compute units, small binary size, optimized performance</li>
+                </ul>
+                <img src="/xfterminal/images/pinocchio.webp" alt="Pinocchio Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
+            </div>
+
+            <div class="integration-point">
+                <h4>📊 Terminal ↔ Pyth Cross-Chain: Real-Time Price Feeds</h4>
+                <p>
+                    <strong>How they connect:</strong> Terminal integrates with Pyth's cross-chain price feeds for real-time, 
+                    reliable price data from multiple blockchains and sources.
+                </p>
+                <p>
+                    <strong>What this means:</strong> Trading decisions are based on Pyth's institutional-grade price feeds, 
+                    providing accurate, real-time pricing for thousands of assets across different chains.
+                </p>
+                <ul>
+                    <li><strong>Type of connection:</strong> On-chain price oracle + off-chain API</li>
+                    <li><strong>What Pyth provides:</strong> Real-time cross-chain price feeds</li>
+                    <li><strong>Why it's good:</strong> Institutional quality, multi-chain coverage, high reliability</li>
+                </ul>
+                <img src="/xfterminal/images/pyth-crosschain.webp" alt="Pyth Cross-Chain Integration" style="max-width: 300px; height: auto; margin-top: 10px; border-radius: 8px;">
             </div>
         </section>
     </div>
@@ -131,7 +221,7 @@
     <a href="#" class="back-to-top" id="backToTop" title="Back to top">↑</a>
 
     <footer>
-        <p style="font-size: 1.2em; margin-bottom: 10px;"><strong>XForce Terminal Architecture</strong></p>
+        <p style="font-size: 1.2em; margin-bottom: 10px;"><strong>XForce Solutions Architecture</strong></p>
         <p>How Everything Works Together - Explained Simply</p>
         <p style="margin-top: 20px; color: #999; font-size: 0.9em;">Last Updated: 2025</p>
     </footer>

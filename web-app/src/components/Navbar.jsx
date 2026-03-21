@@ -115,6 +115,15 @@ export default function Navbar() {
         { to: '/projects', label: 'Proof of Work' },
     ];
 
+    const architectureItems = [
+        { to: '/architecture', label: 'Overview' },
+        { to: '/architecture/overview', label: 'Big Picture' },
+        { to: '/architecture/backend', label: 'Backend API' },
+        { to: '/architecture/contracts', label: 'Smart Contracts' },
+        { to: '/architecture/crypto', label: 'News Service' },
+        { to: '/architecture/system', label: 'System Overview' },
+    ];
+
     const fiveWsItems = [
         { to: '/5ws', label: 'Overview' },
         { to: '/who', label: 'Who?' },
@@ -135,7 +144,6 @@ export default function Navbar() {
                             to="/"
                             className="text-2xl font-bold text-white hover:text-primary-400 transition-all duration-200 group"
                         >
-                            Terminal
                         </Link>
                     </div>
 
@@ -143,10 +151,10 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-1">
                         <Dropdown label="5Ws and H" items={fiveWsItems} />
                         <Dropdown label="Roadmap" items={roadmapItems} />
-                        <NavLink to="/architecture">Architecture</NavLink>
-                        <NavLink to="/proposal">Proposal</NavLink>
+                        <Dropdown label="Architecture" items={architectureItems} />
                         <NavLink to="/integrations">Integrations</NavLink>
-                        <NavLink to="/traction">Traction</NavLink>
+                        <NavLink to="/demo">Demo</NavLink>
+                        <NavLink to="/demand">Demand</NavLink>
                         <Dropdown label="About me" items={aboutMeItems} />
                     </div>
 
@@ -227,9 +235,9 @@ export default function Navbar() {
                             </div>
 
                             <MobileNavLink to="/architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</MobileNavLink>
-                            <MobileNavLink to="/proposal" onClick={() => setMobileMenuOpen(false)}>Proposal</MobileNavLink>
                             <MobileNavLink to="/integrations" onClick={() => setMobileMenuOpen(false)}>Integrations</MobileNavLink>
-                            <MobileNavLink to="/traction" onClick={() => setMobileMenuOpen(false)}>Traction</MobileNavLink>
+                            <MobileNavLink to="/demo" onClick={() => setMobileMenuOpen(false)}>Demo</MobileNavLink>
+                            <MobileNavLink to="/demand" onClick={() => setMobileMenuOpen(false)}>Demand</MobileNavLink>
 
                             {/* Mobile About Me Dropdown */}
                             <div>

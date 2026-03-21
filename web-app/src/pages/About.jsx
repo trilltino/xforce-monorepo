@@ -6,7 +6,7 @@ export default function About() {
                 <div className="relative mb-4 w-48 h-48">
                     {/* Profile image */}
                     <img
-                        src="/xforcesolutions/images/tino.webp"
+                        src="/xfterminal/images/tino.webp"
                         alt="Tino"
                         className="w-full h-full rounded-full object-cover border-4 border-white dark:border-white shadow-2xl"
                         loading="eager"
