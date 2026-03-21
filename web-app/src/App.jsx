@@ -16,6 +16,7 @@ import Status from './pages/Status';
 import Integrations from './pages/Integrations';
 import Demo from './pages/Demo';
 import Demand from './pages/Demand';
+import Competition from './pages/Competition';
 import Roadmap from './pages/roadmap/Roadmap';
 import Month1 from './pages/roadmap/Month1';
 import Month2 from './pages/roadmap/Month2';
@@ -55,6 +56,7 @@ function App() {
                             <Route path="/integrations" element={<Integrations />} />
                             <Route path="/demo" element={<Demo />} />
                             <Route path="/demand" element={<Demand />} />
+                            <Route path="/competition" element={<Competition />} />
                             <Route path="/roadmap" element={<Roadmap />} />
                             <Route path="/roadmap/month1" element={<Month1 />} />
                             <Route path="/roadmap/month2" element={<Month2 />} />

@@ -101,6 +101,7 @@ export default function Navbar() {
     const [mobileXfTerminalOpen, setMobileXfTerminalOpen] = useState(false);
     const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
     const [mobile5WsOpen, setMobile5WsOpen] = useState(false);
+    const [mobileTractionOpen, setMobileTractionOpen] = useState(false);
 
     const roadmapItems = [
         { to: '/roadmap', label: 'Overview' },
@@ -134,6 +135,11 @@ export default function Navbar() {
         { to: '/how', label: 'How?' },
     ];
 
+    const tractionItems = [
+        { to: '/demand', label: 'Demand' },
+        { to: '/competition', label: 'Competition' },
+    ];
+
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm shadow-lg">
             <div className="container mx-auto px-4">
@@ -154,7 +160,7 @@ export default function Navbar() {
                         <Dropdown label="Architecture" items={architectureItems} />
                         <NavLink to="/integrations">Integrations</NavLink>
                         <NavLink to="/demo">Demo</NavLink>
-                        <NavLink to="/demand">Demand</NavLink>
+                        <Dropdown label="Traction" items={tractionItems} />
                         <Dropdown label="About me" items={aboutMeItems} />
                     </div>
 
@@ -237,7 +243,32 @@ export default function Navbar() {
                             <MobileNavLink to="/architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</MobileNavLink>
                             <MobileNavLink to="/integrations" onClick={() => setMobileMenuOpen(false)}>Integrations</MobileNavLink>
                             <MobileNavLink to="/demo" onClick={() => setMobileMenuOpen(false)}>Demo</MobileNavLink>
-                            <MobileNavLink to="/demand" onClick={() => setMobileMenuOpen(false)}>Demand</MobileNavLink>
+
+                            {/* Mobile Traction Dropdown */}
+                            <div>
+                                <button
+                                    onClick={() => setMobileTractionOpen(!mobileTractionOpen)}
+                                    className="w-full px-4 py-3 text-left text-gray-300 hover:text-primary-400 hover:bg-primary-900/30 rounded-lg transition-all duration-200 font-medium font-nav flex items-center justify-between"
+                                >
+                                    Traction
+                                    <svg className={`h-4 w-4 transition-transform ${mobileTractionOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                {mobileTractionOpen && (
+                                    <div className="pl-4 mt-1 space-y-1">
+                                        {tractionItems.map((item) => (
+                                            <MobileNavLink
+                                                key={item.to}
+                                                to={item.to}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                            >
+                                                {item.label}
+                                            </MobileNavLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
 
                             {/* Mobile About Me Dropdown */}
                             <div>
