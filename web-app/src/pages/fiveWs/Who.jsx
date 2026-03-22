@@ -1,183 +1,62 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 
 export default function Who() {
     return (
-        <div className="max-w-6xl mx-auto py-8 px-4">
+        <div className="max-w-4xl mx-auto py-8 px-4">
             <div className="text-center mb-12">
-                <Link to="/5ws" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-500 mb-4">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Back to 5Ws and H
-                </Link>
-                <h1 className="text-5xl font-bold mb-4 font-heading bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                    Who
-                </h1>
-                <p className="text-xl text-gray-500 dark:text-gray-400 font-sans">
-                    The founder, problem, and ecosystem behind XForce Terminal
+                <p className="text-red-400 font-mono text-sm mb-2">WHO</p>
+                <h1 className="text-5xl font-bold text-white mb-4">Who is building this?</h1>
+                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                    A self-taught Rust engineer who pivoted from law to systems programming — and built the infrastructure to prove it.
                 </p>
             </div>
 
-            <div className="space-y-8">
-                {/* Founder */}
-                <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-3xl font-bold text-primary-400 mb-6 font-heading">The Founder</h2>
-                    <p className="text-gray-600 dark:text-gray-300 font-sans mb-4">
-                        Solo developer from London building professional-grade DeFi infrastructure as a comprehensive portfolio piece demonstrating production-ready Solana development skills. The project represents a deep technical investment in Solana's ecosystem infrastructure.
-                    </p>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Technical Expertise</h3>
-                            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-sans">
-                                <li className="flex items-start">
-                                    <span className="text-primary-500 mr-2 mt-1">•</span>
-                                    <span>Rust systems programming with Tauri, Axum, and Pinocchio frameworks</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-primary-500 mr-2 mt-1">•</span>
-                                    <span>Full-stack development with React, TypeScript, and modern web technologies</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-primary-500 mr-2 mt-1">•</span>
-                                    <span>DeFi protocol integration and smart contract development on Solana</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-primary-500 mr-2 mt-1">•</span>
-                                    <span>P2P infrastructure with Iroh, Braid CRDT, and cryptographic protocols</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Project Vision</h3>
-                            <p className="text-gray-600 dark:text-gray-300 font-sans">
-                                Building the open infrastructure layer that Solana trading has been missing — not just a trading interface, but a comprehensive reference architecture that raises the technical floor for the entire ecosystem.
-                            </p>
-                        </div>
+            <div className="flex flex-col items-center mb-12">
+                <img src={`${import.meta.env.BASE_URL}images/tino.webp`} alt="Tino" className="w-40 h-40 rounded-full object-cover border-4 border-red-600 shadow-2xl mb-6" />
+                <h2 className="text-3xl font-bold text-white mb-1">Tino</h2>
+                <p className="text-red-400 font-medium mb-6">Open Source Software Engineer — Rust, Solana, Distributed Systems</p>
+                <div className="flex items-center gap-6">
+                    <a href="https://www.linkedin.com/in/valentine-i-b0619b2b6/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://github.com/trilltino" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://x.com/StellarEuropa" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div className="space-y-6 mb-12">
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-8">
+                    <h3 className="text-white font-bold text-xl mb-4">Background</h3>
+                    <div className="space-y-4 text-gray-400 leading-relaxed">
+                        <p>After graduating in Law from the University of Warwick, I pivoted to software engineering and taught myself Rust through building real systems — not tutorials, not toy projects, but production infrastructure with real constraints.</p>
+                        <p>I specialise in distributed systems and blockchain infrastructure, building full-stack applications using Leptos, Axum, and Tauri, with focus on P2P protocols and decentralised architecture. I have contributed to IETF protocol implementations, built P2P networking layers, and developed Solana smart contracts.</p>
+                        <p>XForce Terminal is the convergence of everything I have built toward — a production-grade, open-source trading terminal that treats performance as a first-class requirement, not an afterthought.</p>
                     </div>
                 </div>
 
-                {/* The Problem */}
-                <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-3xl font-bold text-primary-400 mb-6 font-heading">The Problem</h2>
-                    <p className="text-gray-600 dark:text-gray-300 font-sans mb-6">
-                        The Solana DeFi ecosystem lacks professional-grade native trading infrastructure. Every serious tool is web-based — constrained by browser performance, dependent on centralised RPC providers, and fragmented across platforms that were never designed to work together.
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-8">
+                    <h3 className="text-white font-bold text-xl mb-4">Superteam UK</h3>
+                    <p className="text-gray-400 leading-relaxed">
+                        Currently active in Superteam UK, contributing to ecosystem growth through developer education and open-source tooling. My work spans protocol-level engineering, DeFi infrastructure, and making decentralised technologies more accessible to developers worldwide. XForce Terminal is being built in public within this community — the 12 technical articles published throughout the build are part of that commitment.
                     </p>
-                    
-                    <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Current Limitations</h3>
-                            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-sans">
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>Browser performance constraints for latency-sensitive trading</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>RPC polling delays (2-5 seconds) unacceptable in fast markets</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>No MEV protection by default — users exposed to front-running</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>Fragmented tools with no unified foundation for developers</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Developer Pain Points</h3>
-                            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-sans">
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>No open reference stack for algorithmic trading strategies</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>Every serious builder starts from scratch</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>Market data, execution, and risk controls exist as separate pieces</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="text-red-500 mr-2 mt-1">•</span>
-                                    <span>Low-latency validator feeds locked behind advanced infrastructure</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
 
-                {/* Competition Analysis */}
-                <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-3xl font-bold text-primary-400 mb-6 font-heading">Competition Gap</h2>
-                    <p className="text-gray-600 dark:text-gray-300 font-sans mb-6">
-                        Existing tools are web-first by design — and that is precisely their limitation. They deliver data dashboards but no execution layer, no open infrastructure, no developer primitives to build on.
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-8">
+                    <h3 className="text-white font-bold text-xl mb-4">Why me?</h3>
+                    <p className="text-gray-400 leading-relaxed">
+                        I am not a team of twenty. I am one engineer who has shipped the contracts, the data pipelines, the P2P layer, and the frontend — and documented every architectural decision publicly. The grant funds four months of focused, verifiable devnet development. Every commit is public. Every benchmark is reproducible. Every article is permanent.
                     </p>
-                    
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Birdeye & Photon</h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">Data dashboards only</p>
-                            <div className="text-xs text-red-500">No execution layer</div>
-                            <div className="text-xs text-red-500">No open infrastructure</div>
-                        </div>
-                        <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Axiom</h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">Browser swap aggregation</p>
-                            <div className="text-xs text-yellow-600">Casual use only</div>
-                            <div className="text-xs text-red-500">Not open source</div>
-                        </div>
-                        <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Phantom Swap</h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">Wallet feature</p>
-                            <div className="text-xs text-yellow-600">Not a trading terminal</div>
-                            <div className="text-xs text-red-500">No developer primitives</div>
-                        </div>
-                    </div>
-                    
-                    <div className="mt-6 p-4 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-700 rounded-lg">
-                        <p className="text-primary-800 dark:text-primary-200 font-medium text-center">
-                            <strong>XForce Terminal</strong> is what they would have built if the foundation had existed.
-                        </p>
-                    </div>
                 </div>
+            </div>
 
-                {/* Market Demand */}
-                <div className="bg-white dark:bg-gray-900 border border-primary-900/30 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-3xl font-bold text-primary-400 mb-6 font-heading">Market Demand</h2>
-                    <p className="text-gray-600 dark:text-gray-300 font-sans mb-6">
-                        The demand is not hypothetical — it is on-chain and verifiable. Solana processed <strong>$1.5 trillion in DEX volume in 2025</strong>, up 57% year-on-year, averaging <strong>3.2 million daily active wallets</strong>.
-                    </p>
-                    
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-6 rounded-lg border border-green-200 dark:border-green-700">
-                            <h3 className="text-xl font-bold text-green-800 dark:text-green-200 mb-3">Existing Market</h3>
-                            <ul className="space-y-2 text-green-700 dark:text-green-300 font-sans">
-                                <li>• Millions of active wallets already trading</li>
-                                <li>• Billions in daily volume processed</li>
-                                <li>• Proven user base that is already here</li>
-                                <li>• This is not a market to be built — it exists at scale</li>
-                            </ul>
-                        </div>
-                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 rounded-lg border border-blue-200 dark:border-blue-700">
-                            <h3 className="text-xl font-bold text-blue-800 dark:text-blue-200 mb-3">Missing Infrastructure</h3>
-                            <ul className="space-y-2 text-blue-700 dark:text-blue-300 font-sans">
-                                <li>• No open, native infrastructure for professional trading</li>
-                                <li>• All wallets trading through browser interfaces</li>
-                                <li>• No MEV protection by default</li>
-                                <li>• No low-latency data or programmable execution layer</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div className="mt-6 text-center">
-                        <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
-                            XForce Terminal is built for that user base — <strong>the infrastructure arrives first, traction follows.</strong>
-                        </p>
-                    </div>
-                </div>
+            <div className="text-center">
+                <Link to="/projects" className="inline-block px-6 py-3 border border-red-600 text-red-400 hover:bg-red-600 hover:text-white rounded-lg transition-colors font-medium">
+                    View Proof of Work
+                </Link>
             </div>
         </div>
     );

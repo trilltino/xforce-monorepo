@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const StackCard = ({ title, items }) => (
@@ -7,7 +7,7 @@ const StackCard = ({ title, items }) => (
         <ul className="text-sm text-gray-400 space-y-2">
             {items.map((item, idx) => (
                 <li key={idx} className="flex items-center">
-                    <span className="text-red-500 mr-2">•</span>
+                    <span className="text-red-500 mr-2">ÔÇó</span>
                     {item}
                 </li>
             ))}
@@ -101,45 +101,45 @@ export default function SystemOverview() {
             <Section title="Data Flow" subtitle="How Information Moves Through the System" delay={0.2}>
                 <div className="overflow-x-auto">
                     <pre className="bg-gray-900/80 border border-gray-800 text-gray-400 p-4 rounded-lg text-xs md:text-sm min-w-[600px]">
-{`┌─────────────────────────────────────────────────────────────────────────────┐
-│                          XFTerminal Architecture                               │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐               │
-│   │   Terminal   │────▶│  Axum API    │────▶│  PostgreSQL  │               │
-│   │   (Tauri)    │◀────│   (Rust)     │◀────│  (SQLx)      │               │
-│   └──────────────┘     └──────┬───────┘     └──────────────┘               │
-│                               │                                              │
-│                               ▼                                              │
-│                        ┌──────────────┐                                       │
-│                        │   Solana     │                                       │
-│                        │  (Contracts) │                                       │
-│                        └──────────────┘                                       │
-│                               │                                              │
-│         ┌─────────────────────┼─────────────────────┐                      │
-│         ▼                     ▼                     ▼                      │
-│   ┌──────────┐         ┌──────────┐         ┌──────────┐                   │
-│   │  Geyser  │         │  Jupiter │         │   Pyth   │                   │
-│   │ (gRPC)   │         │ (Quotes) │         │ (Prices) │                   │
-│   └──────────┘         └──────────┘         └──────────┘                   │
-│                                                                              │
-│   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐               │
-│   │ News Scraper │────▶│  PostgreSQL  │────▶│  React Web   │               │
-│   │  (Python)    │     │   (News DB)  │     │   Dashboard  │               │
-│   └──────────────┘     └──────────────┘     └──────────────┘               │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘`}
+{`ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ
+Ôöé                          XFTerminal Architecture                               Ôöé
+Ôö£ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöñ
+Ôöé                                                                              Ôöé
+Ôöé   ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ     ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ     ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ               Ôöé
+Ôöé   Ôöé   Terminal   ÔöéÔöÇÔöÇÔöÇÔöÇÔûÂÔöé  Axum API    ÔöéÔöÇÔöÇÔöÇÔöÇÔûÂÔöé  PostgreSQL  Ôöé               Ôöé
+Ôöé   Ôöé   (Tauri)    ÔöéÔùÇÔöÇÔöÇÔöÇÔöÇÔöé   (Rust)     ÔöéÔùÇÔöÇÔöÇÔöÇÔöÇÔöé  (SQLx)      Ôöé               Ôöé
+Ôöé   ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ     ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ     ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ               Ôöé
+Ôöé                               Ôöé                                              Ôöé
+Ôöé                               Ôû╝                                              Ôöé
+Ôöé                        ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ                                       Ôöé
+Ôöé                        Ôöé   Solana     Ôöé                                       Ôöé
+Ôöé                        Ôöé  (Contracts) Ôöé                                       Ôöé
+Ôöé                        ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ                                       Ôöé
+Ôöé                               Ôöé                                              Ôöé
+Ôöé         ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ                      Ôöé
+Ôöé         Ôû╝                     Ôû╝                     Ôû╝                      Ôöé
+Ôöé   ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ         ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ         ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ                   Ôöé
+Ôöé   Ôöé  Geyser  Ôöé         Ôöé  Jupiter Ôöé         Ôöé   Pyth   Ôöé                   Ôöé
+Ôöé   Ôöé (gRPC)   Ôöé         Ôöé (Quotes) Ôöé         Ôöé (Prices) Ôöé                   Ôöé
+Ôöé   ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ         ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ         ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ                   Ôöé
+Ôöé                                                                              Ôöé
+Ôöé   ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ     ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ     ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ               Ôöé
+Ôöé   Ôöé News Scraper ÔöéÔöÇÔöÇÔöÇÔöÇÔûÂÔöé  PostgreSQL  ÔöéÔöÇÔöÇÔöÇÔöÇÔûÂÔöé  React Web   Ôöé               Ôöé
+Ôöé   Ôöé  (Python)    Ôöé     Ôöé   (News DB)  Ôöé     Ôöé   Dashboard  Ôöé               Ôöé
+Ôöé   ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ     ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ     ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ               Ôöé
+Ôöé                                                                              Ôöé
+ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ`}
                     </pre>
                 </div>
                 
                 <div className="mt-6 grid md:grid-cols-2 gap-4">
                     <div className="bg-gray-900/50 border border-gray-800 p-4 rounded-lg">
                         <h3 className="font-bold text-red-400 mb-2">Data Flow: Trading</h3>
-                        <p className="text-gray-400 text-sm">Terminal → Axum API → PostgreSQL. Terminal talks directly to Solana blockchain via RPC and Jupiter for quotes.</p>
+                        <p className="text-gray-400 text-sm">Terminal ÔåÆ Axum API ÔåÆ PostgreSQL. Terminal talks directly to Solana blockchain via RPC and Jupiter for quotes.</p>
                     </div>
                     <div className="bg-gray-900/50 border border-gray-800 p-4 rounded-lg">
                         <h3 className="font-bold text-red-400 mb-2">Data Flow: News</h3>
-                        <p className="text-gray-400 text-sm">Python Scraper → PostgreSQL → React Dashboard. News is pulled from 10+ RSS feeds, analyzed, and served via HTTP API.</p>
+                        <p className="text-gray-400 text-sm">Python Scraper ÔåÆ PostgreSQL ÔåÆ React Dashboard. News is pulled from 10+ RSS feeds, analyzed, and served via HTTP API.</p>
                     </div>
                 </div>
             </Section>
@@ -201,7 +201,7 @@ export default function SystemOverview() {
                     <div className="grid md:grid-cols-3 gap-4">
                         <div className="bg-black/40 border border-gray-800 p-4 rounded-lg">
                             <h4 className="font-bold text-red-400 mb-2">Type of Connection</h4>
-                            <p className="text-gray-400 text-sm">Rust library integration — compiled directly into the terminal backend for minimal overhead</p>
+                            <p className="text-gray-400 text-sm">Rust library integration ÔÇö compiled directly into the terminal backend for minimal overhead</p>
                         </div>
                         <div className="bg-black/40 border border-gray-800 p-4 rounded-lg">
                             <h4 className="font-bold text-red-400 mb-2">What It Does</h4>
@@ -223,10 +223,10 @@ export default function SystemOverview() {
                 className="flex justify-between items-center mt-12 pt-8 border-t border-gray-800"
             >
                 <Link to="/architecture/crypto" className="text-gray-400 hover:text-red-400 transition-colors">
-                    ← News Service
+                    ÔåÉ News Service
                 </Link>
                 <Link to="/architecture" className="text-red-400 hover:text-red-300 transition-colors">
-                    Back to Architecture Overview →
+                    Back to Architecture Overview ÔåÆ
                 </Link>
             </motion.div>
         </div>

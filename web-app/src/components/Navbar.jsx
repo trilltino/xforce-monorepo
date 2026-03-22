@@ -102,6 +102,7 @@ export default function Navbar() {
     const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
     const [mobile5WsOpen, setMobile5WsOpen] = useState(false);
     const [mobileTractionOpen, setMobileTractionOpen] = useState(false);
+    const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
 
     const roadmapItems = [
         { to: '/roadmap', label: 'Overview' },
@@ -116,13 +117,14 @@ export default function Navbar() {
         { to: '/projects', label: 'Proof of Work' },
     ];
 
-    const architectureItems = [
-        { to: '/architecture', label: 'Overview' },
-        { to: '/architecture/overview', label: 'Big Picture' },
-        { to: '/architecture/backend', label: 'Backend API' },
-        { to: '/architecture/contracts', label: 'Smart Contracts' },
-        { to: '/architecture/crypto', label: 'News Service' },
-        { to: '/architecture/system', label: 'System Overview' },
+    const appsItems = [
+        { to: '/terminal', label: 'XFTerminal' },
+        { to: '/guide', label: 'XFGuide' },
+    ];
+
+    const tractionItems = [
+        { to: '/competition', label: 'Competition' },
+        { to: '/demand', label: 'Demand' },
     ];
 
     const fiveWsItems = [
@@ -133,16 +135,6 @@ export default function Navbar() {
         { to: '/where', label: 'Where?' },
         { to: '/why', label: 'Why?' },
         { to: '/how', label: 'How?' },
-    ];
-
-    const tractionItems = [
-        { to: '/demand', label: 'Demand' },
-        { to: '/competition', label: 'Competition' },
-    ];
-
-    const appItems = [
-        { to: '/guide', label: 'Guide' },
-        { to: '/terminal', label: 'Terminal' },
     ];
 
     return (
@@ -157,15 +149,18 @@ export default function Navbar() {
                         >
                             <span className="text-red-500">XF</span>Terminal
                         </Link>
+
+
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-1">
                         <Dropdown label="5Ws and H" items={fiveWsItems} />
                         <Dropdown label="Roadmap" items={roadmapItems} />
-                        <Dropdown label="Architecture" items={architectureItems} />
+                        <Dropdown label="Apps" items={appsItems} />
+                        <NavLink to="/architecture">Architecture</NavLink>
+
                         <NavLink to="/integrations">Integrations</NavLink>
-                        <Dropdown label="Apps" items={appItems} />
                         <Dropdown label="Traction" items={tractionItems} />
                         <Dropdown label="About me" items={aboutMeItems} />
                     </div>
@@ -246,27 +241,24 @@ export default function Navbar() {
                                 )}
                             </div>
 
-                            <MobileNavLink to="/architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</MobileNavLink>
-                            <MobileNavLink to="/integrations" onClick={() => setMobileMenuOpen(false)}>Integrations</MobileNavLink>
-                            
                             {/* Mobile Apps Dropdown */}
                             <div>
                                 <button
-                                    onClick={() => setMobileXfTerminalOpen(!mobileXfTerminalOpen)}
+                                    onClick={() => setMobileAppsOpen(!mobileAppsOpen)}
                                     className="w-full px-4 py-3 text-left text-gray-300 hover:text-primary-400 hover:bg-primary-900/30 rounded-lg transition-all duration-200 font-medium font-nav flex items-center justify-between"
                                 >
                                     Apps
-                                    <svg className={`h-4 w-4 transition-transform ${mobileXfTerminalOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className={`h-4 w-4 transition-transform ${mobileAppsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
-                                {mobileXfTerminalOpen && (
+                                {mobileAppsOpen && (
                                     <div className="pl-4 mt-1 space-y-1">
-                                        {appItems.map((item) => (
+                                        {appsItems.map((item) => (
                                             <MobileNavLink
                                                 key={item.to}
                                                 to={item.to}
-                                                onClick={() => { setMobileMenuOpen(false); setMobileXfTerminalOpen(false); }}
+                                                onClick={() => { setMobileMenuOpen(false); setMobileAppsOpen(false); }}
                                             >
                                                 {item.label}
                                             </MobileNavLink>
@@ -274,6 +266,9 @@ export default function Navbar() {
                                     </div>
                                 )}
                             </div>
+
+                            <MobileNavLink to="/architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</MobileNavLink>
+                            <MobileNavLink to="/integrations" onClick={() => setMobileMenuOpen(false)}>Integrations</MobileNavLink>
 
                             {/* Mobile Traction Dropdown */}
                             <div>
@@ -292,7 +287,7 @@ export default function Navbar() {
                                             <MobileNavLink
                                                 key={item.to}
                                                 to={item.to}
-                                                onClick={() => setMobileMenuOpen(false)}
+                                                onClick={() => { setMobileMenuOpen(false); setMobileTractionOpen(false); }}
                                             >
                                                 {item.label}
                                             </MobileNavLink>
