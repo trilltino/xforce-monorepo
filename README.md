@@ -3,11 +3,8 @@
 A comprehensive Solana DeFi ecosystem consisting of a trading terminal, smart contracts, and crypto news aggregation service.
 
 ![XForce Terminal Interface](images/xfterminal-terminal-1.png)
-*The XFTerminal Professional Trading Desktop*
 
 ![Institutional Workflow](images/xfterminal-terminal-2.png)
-*Integrated Data Streaming and Execution*
-
 
 ## Overview
 
@@ -50,6 +47,7 @@ xfterminal/
 Non-custodial Solana DeFi trading platform with desktop terminal, web wallet, and backend API.
 
 **Key Features:**
+
 - Real-time price charts (lightweight-charts)
 - Multi-wallet support (Phantom, Solflare, Backpack)
 - Jupiter aggregator integration
@@ -65,6 +63,7 @@ Non-custodial Solana DeFi trading platform with desktop terminal, web wallet, an
 Solana smart contracts for batch token swaps.
 
 **Key Features:**
+
 - Batch up to 10 swaps per transaction
 - Jupiter integration for optimal routing
 - Slippage protection
@@ -81,6 +80,7 @@ Solana smart contracts for batch token swaps.
 Crypto news aggregation service with sentiment analysis.
 
 **Key Features:**
+
 - RSS feed aggregation from 10+ sources
 - Sentiment analysis using NLTK/VADER
 - PostgreSQL storage
@@ -94,6 +94,7 @@ Crypto news aggregation service with sentiment analysis.
 ## Quick Start
 
 ### Prerequisites
+
 - Rust 1.70+
 - Node.js 18+
 - Python 3.9+
@@ -140,6 +141,7 @@ Each project can be developed independently. See individual README files for det
 ## Documentation
 
 Every folder contains a comprehensive README with:
+
 - Project structure
 - Feature descriptions
 - Setup instructions
@@ -163,6 +165,7 @@ Apache-2.0 / MIT - See individual project LICENSE files
 ## Security
 
 This platform handles cryptocurrency transactions. Always:
+
 - Review code before deploying
 - Test on devnet before mainnet
 - Keep private keys secure
