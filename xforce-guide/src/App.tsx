@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <div className="absolute top-[35%] left-[60px] w-full max-w-[550px]">
           <h1 className="text-[72px] font-[900] leading-[1.02] tracking-[-0.035em] m-0 text-inherit">
             Getting started on the <br />
-            Terminal.
+            <span className="text-red-500">XF</span>Terminal
           </h1>
         </div>
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
           <div className="transform rotate-[270deg] origin-bottom-right translate-x-full">
             <div className="text-right">
               <span className="block text-[58px] font-[900] tracking-[-0.04em] leading-[0.9] text-inherit">
-                Terminal
+                <span className="text-red-500">XF</span>Terminal
               </span>
               <span className="block text-[34px] font-[300] tracking-[-0.015em] leading-[1.2] opacity-80 mt-2 text-inherit">
                 for Professionals
@@ -47,9 +47,10 @@ const App: React.FC = () => {
 
           <div className="grid grid-cols-1 gap-14 max-w-2xl">
             <p className="text-2xl font-medium leading-relaxed text-inherit opacity-90">
-              The premier certification for mastering the Solana Virtual Machine. SMC is an 8-hour,
-              self-paced e-learning course that provides a technical introduction to the Solana ecosystem
-              and covers more than 70 terminal-integrated functions.
+              Master the mechanics of Solana markets and liquidity with the SMC certification.
+              This comprehensive guide provides a masterclass in using the terminal to analyze
+              on-chain market dynamics with over 70 terminal-integrated functions built for
+              professional-grade Solana analysis.
             </p>
 
             <div className="space-y-12 mt-4">
@@ -72,7 +73,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="mt-auto pt-12 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center opacity-40">
-          <div className="text-base font-[900] tracking-[0.2em] uppercase">Terminal | SMC PRO</div>
+          <div className="text-base font-[900] tracking-[0.2em] uppercase"><span className="text-red-500">XF</span>Terminal | SMC PRO</div>
           <div className="text-base font-black text-inherit">PAGE 02</div>
         </div>
       </div>

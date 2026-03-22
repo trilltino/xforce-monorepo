@@ -18,7 +18,7 @@ export default function Demand() {
                         <div>
                             <h2 className="text-3xl font-bold text-blue-800 dark:text-blue-200 mb-4 font-heading">Solana Foundation Recognition</h2>
                             <p className="text-blue-700 dark:text-blue-300 font-sans text-lg mb-4">
-                                The Solana Foundation's own <strong>Indexer Tooling RFP</strong> acknowledged that Geyser "does not provide an ergonomic end-to-end solution for developers" — XForce Terminal's Milestone 1.1 is that solution: a production Rust Geyser pipeline, open source and forkable.
+                                The Solana Foundation&apos;s own <strong>Indexer Tooling RFP</strong> acknowledged that Geyser &quot;does not provide an ergonomic end-to-end solution for developers&quot; — XForce Terminal&apos;s Milestone 1.1 is that solution: a production Rust Geyser pipeline, open source and forkable.
                             </p>
                         </div>
                     </div>
@@ -32,6 +32,89 @@ export default function Demand() {
                     </div>
                 </div>
 
+                {/* Ecosystem Validation */}
+                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 border-2 border-indigo-300 dark:border-indigo-700 rounded-xl p-8 shadow-lg">
+                    <div className="flex items-start mb-6">
+                        <div className="text-4xl mr-4">🔭</div>
+                        <div>
+                            <h2 className="text-3xl font-bold text-indigo-800 dark:text-indigo-200 mb-4 font-heading">Ecosystem Validation</h2>
+                            <p className="text-indigo-700 dark:text-indigo-300 font-sans text-lg mb-4">
+                                Direct recognition from key infrastructure providers in the Solana ecosystem validates the necessity of XForce Terminal's unified data layer.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* CHOPPAtheSHARK */}
+                        <div className="bg-indigo-100/50 dark:bg-indigo-900/30 p-6 rounded-lg border border-indigo-200 dark:border-indigo-800 flex flex-col h-full">
+                            <div className="flex items-center mb-6">
+                                <div className="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4 text-xl">C</div>
+                                <div>
+                                    <h3 className="font-bold text-indigo-900 dark:text-indigo-100 text-lg">CHOPPAtheSHARK</h3>
+                                    <p className="text-sm text-indigo-700 dark:text-indigo-400">Moderator, Pyth Network</p>
+                                </div>
+                            </div>
+                            
+                            <div className="flex-grow">
+                                <blockquote className="relative mb-6">
+                                    <span className="absolute -top-4 -left-2 text-6xl text-indigo-300/40 dark:text-indigo-600/30 font-serif leading-none">&lsquo;</span>
+                                    <p className="text-2xl font-serif italic text-indigo-900 dark:text-indigo-100 leading-tight relative z-10">
+                                        Seems like something people could certainly use
+                                    </p>
+                                </blockquote>
+                                <div className="bg-indigo-200/50 dark:bg-indigo-800/20 p-4 rounded-md border-l-4 border-indigo-500 mb-6">
+                                    <p className="text-sm text-indigo-800 dark:text-indigo-200 font-medium">
+                                        <strong>Context:</strong> Encouraged submission as a hackathon project (March 2026).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-auto">
+                                <p className="text-xs text-indigo-600 dark:text-indigo-400 mb-2 uppercase tracking-wider font-semibold">Verification Screenshot</p>
+                                <img 
+                                    src="https://i.postimg.cc/1PhtRkz3/Screenshot-2026-03-22-045818.png" 
+                                    alt="CHOPPAtheSHARK testimonial" 
+                                    className="rounded shadow-sm border border-indigo-200 dark:border-indigo-700 w-full hover:scale-[1.02] transition-transform duration-300 cursor-zoom-in"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Aditya520 */}
+                        <div className="bg-indigo-100/50 dark:bg-indigo-900/30 p-6 rounded-lg border border-indigo-200 dark:border-indigo-800 flex flex-col h-full">
+                            <div className="flex items-center mb-6">
+                                <div className="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4 text-xl">A</div>
+                                <div>
+                                    <h3 className="font-bold text-indigo-900 dark:text-indigo-100 text-lg">Aditya520</h3>
+                                    <p className="text-sm text-indigo-700 dark:text-indigo-400">Moderator, Pyth Network</p>
+                                </div>
+                            </div>
+                            
+                            <div className="flex-grow">
+                                <blockquote className="relative mb-6">
+                                    <span className="absolute -top-4 -left-2 text-6xl text-indigo-300/40 dark:text-indigo-600/30 font-serif leading-none">&lsquo;</span>
+                                    <p className="text-xl font-serif italic text-indigo-900 dark:text-indigo-100 leading-snug relative z-10">
+                                        Great idea. happy to help you in any way possible. If you want to extend the data layer at all (historical OHLC, broader asset coverage), Pyth Pro API and the MCP server are worth a look.
+                                    </p>
+                                </blockquote>
+                                <div className="bg-indigo-200/50 dark:bg-indigo-800/20 p-4 rounded-md border-l-4 border-indigo-500 mb-6">
+                                    <p className="text-sm text-indigo-800 dark:text-indigo-200 font-medium">
+                                        <strong>Context:</strong> Direct ecosystem feedback (March 2026).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-auto">
+                                <p className="text-xs text-indigo-600 dark:text-indigo-400 mb-2 uppercase tracking-wider font-semibold">Verification Screenshot</p>
+                                <img 
+                                    src="https://i.postimg.cc/B4GmLMzX/Screenshot-2026-03-22-152547.png" 
+                                    alt="Aditya520 testimonial" 
+                                    className="rounded shadow-sm border border-indigo-200 dark:border-indigo-700 w-full hover:scale-[1.02] transition-transform duration-300 cursor-zoom-in"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Bot Development Reality */}
                 <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border-2 border-red-300 dark:border-red-700 rounded-xl p-8 shadow-lg">
                     <div className="flex items-start mb-6">
@@ -39,7 +122,7 @@ export default function Demand() {
                         <div>
                             <h2 className="text-3xl font-bold text-red-800 dark:text-red-200 mb-4 font-heading">Bot Development Reality Check</h2>
                             <p className="text-red-700 dark:text-red-300 font-sans text-lg mb-4">
-                                Bot development guides are blunter: <strong>"if your bot is reading from a public RPC, you're already late"</strong> — XForce Terminal fixes this at the infrastructure level and exposes it via a REST API with Python, JavaScript, and Rust bot integrations, so the next developer doesn't rebuild the data layer from scratch.
+                                Bot development guides are blunter: <strong>&quot;if your bot is reading from a public RPC, you&apos;re already late&quot;</strong> — XForce Terminal fixes this at the infrastructure level and exposes it via a REST API with Python, JavaScript, and Rust bot integrations, so the next developer doesn&apos;t rebuild the data layer from scratch.
                             </p>
                         </div>
                     </div>
@@ -128,11 +211,11 @@ export default function Demand() {
                             <div className="text-green-600 dark:text-green-400 text-sm mt-1">Displaced Ethereum</div>
                         </div>
                     </div>
-                    <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-lg border-l-4 border-green-600">
-                        <p className="text-green-800 dark:text-green-200 font-medium">
-                            <strong>XForce Terminal is that reference:</strong> Every component ships as a modular Rust library, documented, benchmarked, and production-ready.
-                        </p>
-                    </div>
+                        <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-lg border-l-4 border-green-600">
+                            <p className="text-green-800 dark:text-green-200 font-medium">
+                                <strong>XForce Terminal is that reference:</strong> Every component ships as a modular Rust library, documented, benchmarked, and production-ready.
+                            </p>
+                        </div>
                 </div>
 
                 {/* Market Volume */}

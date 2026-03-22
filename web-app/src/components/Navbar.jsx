@@ -140,6 +140,11 @@ export default function Navbar() {
         { to: '/competition', label: 'Competition' },
     ];
 
+    const appItems = [
+        { to: '/guide', label: 'Guide' },
+        { to: '/terminal', label: 'Terminal' },
+    ];
+
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm shadow-lg">
             <div className="container mx-auto px-4">
@@ -150,6 +155,7 @@ export default function Navbar() {
                             to="/"
                             className="text-2xl font-bold text-white hover:text-primary-400 transition-all duration-200 group"
                         >
+                            <span className="text-red-500">XF</span>Terminal
                         </Link>
                     </div>
 
@@ -159,7 +165,7 @@ export default function Navbar() {
                         <Dropdown label="Roadmap" items={roadmapItems} />
                         <Dropdown label="Architecture" items={architectureItems} />
                         <NavLink to="/integrations">Integrations</NavLink>
-                        <NavLink to="/demo">Demo</NavLink>
+                        <Dropdown label="Apps" items={appItems} />
                         <Dropdown label="Traction" items={tractionItems} />
                         <Dropdown label="About me" items={aboutMeItems} />
                     </div>
@@ -242,7 +248,32 @@ export default function Navbar() {
 
                             <MobileNavLink to="/architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</MobileNavLink>
                             <MobileNavLink to="/integrations" onClick={() => setMobileMenuOpen(false)}>Integrations</MobileNavLink>
-                            <MobileNavLink to="/demo" onClick={() => setMobileMenuOpen(false)}>Demo</MobileNavLink>
+                            
+                            {/* Mobile Apps Dropdown */}
+                            <div>
+                                <button
+                                    onClick={() => setMobileXfTerminalOpen(!mobileXfTerminalOpen)}
+                                    className="w-full px-4 py-3 text-left text-gray-300 hover:text-primary-400 hover:bg-primary-900/30 rounded-lg transition-all duration-200 font-medium font-nav flex items-center justify-between"
+                                >
+                                    Apps
+                                    <svg className={`h-4 w-4 transition-transform ${mobileXfTerminalOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                {mobileXfTerminalOpen && (
+                                    <div className="pl-4 mt-1 space-y-1">
+                                        {appItems.map((item) => (
+                                            <MobileNavLink
+                                                key={item.to}
+                                                to={item.to}
+                                                onClick={() => { setMobileMenuOpen(false); setMobileXfTerminalOpen(false); }}
+                                            >
+                                                {item.label}
+                                            </MobileNavLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
 
                             {/* Mobile Traction Dropdown */}
                             <div>

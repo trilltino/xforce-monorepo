@@ -15,6 +15,8 @@ import Documentation from './pages/Documentation';
 import Status from './pages/Status';
 import Integrations from './pages/Integrations';
 import Demo from './pages/Demo';
+import Guide from './pages/Guide';
+import Terminal from './pages/Terminal';
 import Demand from './pages/Demand';
 import Competition from './pages/Competition';
 import Roadmap from './pages/roadmap/Roadmap';
@@ -55,6 +57,8 @@ function App() {
                             <Route path="/status" element={<Status />} />
                             <Route path="/integrations" element={<Integrations />} />
                             <Route path="/demo" element={<Demo />} />
+                            <Route path="/guide" element={<Guide />} />
+                            <Route path="/terminal" element={<Terminal />} />
                             <Route path="/demand" element={<Demand />} />
                             <Route path="/competition" element={<Competition />} />
                             <Route path="/roadmap" element={<Roadmap />} />

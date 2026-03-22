@@ -59,7 +59,7 @@ export function Login() {
 
   return (
     <div
-      className={`min-h-screen w-full flex flex-col font-sans relative overflow-hidden focus:outline-none ${isLightMode ? 'bg-white text-black' : 'bg-[#0a0a0f] text-[#a0a0a0]'}`}
+      className={`min-h-screen w-full flex flex-col font-sans relative overflow-hidden focus:outline-none ${isLightMode ? 'bg-white text-black' : 'bg-black text-[#a0a0a0]'}`}
       tabIndex={0}
       onKeyDown={handleKeyPress}
     >

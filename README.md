@@ -2,6 +2,13 @@
 
 A comprehensive Solana DeFi ecosystem consisting of a trading terminal, smart contracts, and crypto news aggregation service.
 
+![XForce Terminal Interface](images/xfterminal-terminal-1.png)
+*The XFTerminal Professional Trading Desktop*
+
+![Institutional Workflow](images/xfterminal-terminal-2.png)
+*Integrated Data Streaming and Execution*
+
+
 ## Overview
 
 XForce Platform provides professional-grade tools for Solana DeFi traders, including:

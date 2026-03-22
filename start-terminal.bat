@@ -5,6 +5,18 @@ echo   XForce Terminal - Desktop Application
 echo ============================================================
 echo.
 
+REM Setup MSVC Environment for Cargo (Required for C/C++ dependencies)
+set VS_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat
+if exist "%VS_PATH%" (
+    echo [0/5] Setting up MSVC environment...
+    call "%VS_PATH%" x64
+) else (
+    echo [WARNING] MSVC vcvarsall.bat not found.
+    echo Compilation of C-dependent crates like aws-lc-sys may fail.
+)
+
+
+
 REM Check if Rust/Cargo is available
 where cargo >nul 2>nul
 if %ERRORLEVEL% neq 0 (
@@ -64,25 +76,38 @@ if not exist node_modules (
 )
 
 REM Start the news service
-echo [3/5] Launching news service...
-where wt >nul 2>nul
-if %ERRORLEVEL% equ 0 (
-    wt -w 0 nt -d "%~dp0xforce-crypto-info\news-service" --title "News Service" cmd /k "cargo run"
-) else (
-    start /b cmd /c "cd /d "%~dp0xforce-crypto-info\news-service" && cargo run"
+echo [3/5] Building and launching news service...
+cd /d "%~dp0xforce-crypto-info\news-service"
+call cargo build
+if errorlevel 1 (
+    echo ERROR: News Service build failed!
+    pause
+    exit /b 1
 )
+REM Run the binary directly to avoid cargo lock
+set NEWS_EXE="%~dp0xforce-crypto-info\target\debug\news-service-server.exe"
+start /b cmd /c "cd /d "%~dp0xforce-crypto-info\news-service" && %NEWS_EXE%"
 
 REM Start the backend API server
-echo [4/5] Launching backend API server...
-where wt >nul 2>nul
-if %ERRORLEVEL% equ 0 (
-    wt -w 0 nt -d "%~dp0xforce-terminal\backend" --title "Backend API" cmd /k "cargo run"
-) else (
-    start /b cmd /c "cd /d "%~dp0xforce-terminal\backend" && cargo run"
+echo [4/5] Building and launching backend API server...
+cd /d "%~dp0xforce-terminal\backend"
+call cargo build
+if errorlevel 1 (
+    echo ERROR: Backend API build failed!
+    pause
+    exit /b 1
 )
+REM Run the binary directly to avoid cargo lock
+set BACKEND_EXE="%~dp0xforce-terminal\target\debug\backend.exe"
+start /b cmd /c "cd /d "%~dp0xforce-terminal\backend" && %BACKEND_EXE%"
+
+echo.
+echo Waiting for services to stabilize...
+timeout /t 5 /nobreak >nul
 
 REM Go back to terminal-tauri root and start Tauri
 cd /d "%~dp0xforce-terminal\terminal-tauri"
+
 echo.
 echo [5/5] Starting XForce Terminal with Tauri...
 echo.
@@ -91,6 +116,7 @@ echo Close the Tauri window to stop the application.
 echo.
 REM Start Tauri in development mode
 cargo tauri dev
+
 
 if errorlevel 1 (
     echo.
